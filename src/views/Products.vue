@@ -30,9 +30,9 @@
               </div>
               <div class="card-footer">
                 <div class="wrapper">
-                  <span class="minus">－</span>
-                  <span class="num">01</span>
-                  <span class="plus">＋</span>
+                  <a class="minus" @click.prevent="minusCount()">－</a>
+                  <input class="num" value="1" />
+                  <a class="plus" @click.prevent="addCount(item.id)">＋</a>
                 </div>
 
                 <button class="btn" type="button" @click="addToCart(item.id)">
@@ -73,6 +73,13 @@ export default {
     ShoppingBagIcon,
   },
   methods: {
+    minusCount() {
+      // 補
+    },
+    addCount(id) {
+      // 補
+      console.log(id);
+    },
     getProducts() {
       this.isLoading = true;
       this.$http
@@ -80,15 +87,15 @@ export default {
           `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/products/all`
         )
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           this.isLoading = false;
           this.products = res.data.products;
         });
     },
-    addToCart(id, qty = 1) {
+    addToCart(id, count = 1) {
       const data = {
         product_id: id,
-        qty: qty,
+        qty: count,
       };
       this.isLoadingItem = id;
       this.$http
@@ -96,8 +103,8 @@ export default {
           `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/cart`,
           { data }
         )
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+          // console.log(res);
           this.isLoadingItem = "";
           emitter.emit("getCart");
         });
@@ -264,18 +271,25 @@ export default {
               border-radius: 12px;
               border: 1px solid rgba(134, 134, 134, 0.3);
               // box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-              span {
-                width: 100%;
+              a {
+                width: 70%;
                 text-align: center;
                 font-size: 1rem;
                 font-weight: 600;
                 cursor: pointer;
                 user-select: none;
+                margin-bottom: 0;
+                text-decoration: none;
               }
-              span.num {
+              .num {
+                max-width: 2rem;
+                text-align: center;
+                border: none;
                 border-right: 2px solid rgba(0, 0, 0, 0.2);
                 border-left: 2px solid rgba(0, 0, 0, 0.2);
                 pointer-events: none;
+                margin-bottom: 0;
+                padding: 0 5px;
               }
             }
             .btn {

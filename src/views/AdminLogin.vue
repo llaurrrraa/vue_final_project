@@ -54,7 +54,7 @@ export default {
           alert(res.data.message);
           const { token, expired } = res.data;
           document.cookie = `mytoken=${token}; expires=${new Date(expired)};`;
-          this.$router.push("/admin");
+          this.$router.push("/admin/products");
         })
         .catch((err) => {
           alert(err.response.data.message);

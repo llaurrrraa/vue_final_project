@@ -4,6 +4,9 @@ const routes = [
   {
     path: "/",
     component: () => import("../views/Home.vue"),
+    meta: {
+      title: "Entrance",
+    },
     children: [
       {
         path: "about",
@@ -14,16 +17,16 @@ const routes = [
         component: () => import("../views/Products.vue"),
       },
       {
-        path: "product/:id", // 多個產品列表
-        component: () => import("../views/Product.vue"),
-      },
-      {
-        path: "product", // 單一產品列表
+        path: "product/:id", // 單一產品列表
         component: () => import("../views/Product.vue"),
       },
       {
         path: "cart", // 購物車
         component: () => import("../views/Cart.vue"),
+      },
+      {
+        path: "order", // 購物車
+        component: () => import("../views/Order.vue"),
       },
     ],
   },
@@ -40,8 +43,16 @@ const routes = [
         component: () => import("../views/AdminProducts.vue"),
       },
       {
-        path: "coupon", // 多個產品列表
-        component: () => import("../views/AdminCoupon.vue"),
+        path: "orders", // 訂單列表
+        component: () => import("../views/AdminOrders.vue"),
+      },
+      {
+        path: "coupons", // 優惠卷列表
+        component: () => import("../views/AdminCoupons.vue"),
+      },
+      {
+        path: "posts", // 貼文列表
+        component: () => import("../views/AdminPosts.vue"),
       },
     ],
   },

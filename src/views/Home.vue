@@ -1,132 +1,171 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">
-        <img
-          src="../assets/images/icons/auntieTsai02-icon.png"
-          height="60"
-          class="d-inline-block align-text-top"
-        />
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
+  <div class="container home-banner">
+    <div class="swiper my-5">
+      <swiper
+        :modules="modules"
+        :slides-per-view="1"
+        :space-between="50"
+        :pagination="{ clickable: true }"
+        navigation
       >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar navbar-expand-lg">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <div class="d-flex bd-highlight me-5 navbar-nav">
-            <div class="p-2 bd-highlight nav-item ms-3">
-              <router-link to="/" class="active router-link nav-link"
-                >首頁</router-link
-              >
-            </div>
-            <div class="p-2 bd-highlight nav-item ms-3">
-              <router-link to="/products" class="router-link nav-link"
-                >所有產品</router-link
-              >
-            </div>
-            <div class="p-2 bd-highlight nav-item ms-3">
-              <router-link to="/about" class="nav-link router-link"
-                >關於我們</router-link
-              >
-            </div>
-            <div class="p-2 bd-highlight nav-item ms-3">
-              <HeartIcon class="heart-icon pb-1" />
-            </div>
-            <div class="p-2 bd-highlight nav-item ms-3 position-relative">
-              <router-link to="/cart" class="nav-link shopping-bag-bg">
-                <ShoppingBagIcon class="shopping-icon pb-1" />
-                <span
-                  class="position-absolute top-10 start-80 translate-middle badge rounded-pill bg-danger"
-                  >{{ cartData.carts.length }}</span
-                >
-              </router-link>
-            </div>
+        <swiper-slide>
+          <div class="cow-banner">
+            <h1>哞吉了！</h1>
+            <h1>- 乳製品 <span>8</span> 折起 -</h1>
+            <h2>( 因應冷藏運送有區域限制，下單前請詳閱產品運送資訊 )</h2>
           </div>
-        </div>
-      </div>
+        </swiper-slide>
+        <swiper-slide>
+          <div class="rice-banner">
+            <h1>～ 稻叮來 ～</h1>
+            <h2>誰知盤中飧，粒粒皆辛苦</h2>
+            <h3>米飯加購價<span> 89+</span> 元起！</h3>
+          </div>
+        </swiper-slide>
+        <swiper-slide>
+          <div class="ppl-banner">
+            <h1>公平貿易</h1>
+            <h3>透過透明與互相尊重的貿易夥伴關係</h3>
+            <h3>我們推動永續與道德的發展體系</h3>
+          </div>
+        </swiper-slide>
+      </swiper>
     </div>
-  </nav>
-  <div class="container">
-    <router-view />
   </div>
-  <loading v-model:active="isLoading"></loading>
 </template>
-
 <script>
-import { ShoppingBagIcon } from "@heroicons/vue/outline";
-import { HeartIcon } from "@heroicons/vue/solid";
-import emitter from "@/libraries/emitt.js";
+import { Swiper, SwiperSlide } from "swiper/vue/swiper-vue";
+import { Navigation, Pagination } from "swiper";
+import "swiper/swiper.scss";
+import "swiper/modules/navigation/navigation.min.css";
+import "swiper/modules/pagination/pagination.min.css";
 
 export default {
   data() {
     return {
-      isLoading: false,
-      cartData: {
-        carts: [],
-      },
+      images: [
+        "https://images.unsplash.com/photo-1500595046743-cd271d694d30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2674&q=80",
+        "https://images.unsplash.com/photo-1611501355758-0d8b8208e1ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80",
+        "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80",
+      ],
+      modules: [Navigation, Pagination],
+      product:[],
     };
   },
   components: {
-    HeartIcon,
-    ShoppingBagIcon,
+    Swiper,
+    SwiperSlide,
   },
   methods: {
-    getCart() {
-      this.$http
-        .get(
-          `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/cart`
-        )
+    getProduct() {
+      const api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_API_PATH}/admin/products`;
+      this.$http.get(api)
         .then((res) => {
-          this.cartData = res.data.data;
-          // console.log(res);
-        });
+          console.log(res);
+        })
     },
   },
   mounted() {
-    this.getCart();
-    // mitt 建立監聽
-    emitter.on("getCart", () => {
-      this.getCart();
-    });
+    this.getProduct();
   },
 };
 </script>
-
 <style lang="scss">
-.router-link {
-  text-decoration: none;
-  color: #000;
-  font-weight: 700;
+.home-banner {
+  max-width: 1440px;
 }
-.router-link:hover {
-  background-color: #65ffbf;
-  border-radius: 5px;
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  border-radius: 25px;
+  padding: 2rem 2rem;
 }
-.nav-link {
-  padding: 0;
-  color: #000;
+.cow-banner {
+  background-image: url(https://images.unsplash.com/photo-1500595046743-cd271d694d30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2674&q=80);
+  h1 {
+    font-size: 5.5rem;
+    color: #fff;
+    letter-spacing: 15px;
+    font-weight: 900;
+    text-shadow: 0 0 2px #000;
+    span {
+      color: #bdccd4;
+    }
+  }
+  h2 {
+    margin-top: 1.8rem;
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: 8px;
+  }
 }
-.heart-icon,
-.shopping-icon {
-  width: 25px;
+.rice-banner {
+  background-image: url(https://images.unsplash.com/photo-1611501355758-0d8b8208e1ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80);
+  h1 {
+    font-size: 5.5rem;
+    color: #fff;
+    letter-spacing: 15px;
+    font-weight: 900;
+    text-shadow: 0 0 2px #000;
+  }
+  h2 {
+    color: #000;
+    font-weight: 900;
+    letter-spacing: 8px;
+    text-shadow: 0 0 2px #fff;
+    margin-top: 1.5rem;
+  }
+  h3 {
+    font-size: 2.5rem;
+    color: #000;
+    font-weight: 900;
+    letter-spacing: 15px;
+    text-shadow: 0 0 2px #fff;
+    margin-top: 1.5rem;
+    span {
+      color: #fff;
+      text-shadow: 0 0 2px #000;
+      border: 2px solid #fff;
+      font-weight: 300;
+      font-size: 3rem;
+      padding: 0.5rem;
+      // background-color: rgba(255,255,255,0.8);
+      border-radius: 15px;
+    }
+  }
 }
-.heart-icon {
-  color: #9c9c9c;
+.ppl-banner {
+  background-image: url(https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80);
+  h1 {
+    text-align: center;
+    font-size: 5.5rem;
+    color: #fff;
+    padding: 0 5rem;
+    letter-spacing: 5rem;
+    font-weight: 900;
+    text-shadow: 0 0 2px #000;
+  }
+  h3 {
+    text-align: center;
+    font-size: 2.5rem;
+    letter-spacing: 15px;
+    color: #fff;
+    opacity: 0.7;
+    font-weight: 900;
+    text-shadow: 0 0 2px #000;
+  }
 }
-.heart-icon:hover {
-  color: tomato;
-  cursor: pointer;
-}
-.shopping-bag-bg:hover {
-  background-color: #65ffbf;
-  border-radius: 5px;
+.cow-banner,
+.rice-banner,
+.ppl-banner {
+  height: 500px;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>

@@ -32,7 +32,7 @@
       </swiper>
     </div>
     <div class="category">
-      <button type="button" class="btn btn-light">
+      <button type="button" class="btn">
         <img src="https://cdn-icons-png.flaticon.com/512/3099/3099663.png" alt="">
         <p>蔬菜類</p>
       </button>
@@ -180,13 +180,19 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    letter-spacing: 1.5px;
+    border-radius: 10px;
+    box-shadow: 1px 0px 15px 1px rgba(240,240,240,1);
     p{
-      margin-bottom: 0;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      color: #9c9c9c;
     }
   }
   .btn img{
     max-width:5rem;
     max-height:5rem;
+    margin:0.5rem 0;
   }
 }
 </style>

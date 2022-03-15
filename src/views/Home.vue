@@ -31,15 +31,11 @@
         </swiper-slide>
       </swiper>
     </div>
-    <div class="category">
-      <button type="button" class="btn">
-        <img src="https://cdn-icons-png.flaticon.com/512/3099/3099663.png" alt="">
-        <p>蔬菜類</p>
-      </button>
-    </div>
+    <CategoryBtns />
   </div>
 </template>
 <script>
+import CategoryBtns from "@/components/CategoryBtns.vue";
 import { Swiper, SwiperSlide } from "swiper/vue/swiper-vue";
 import { Navigation, Pagination } from "swiper";
 import "swiper/swiper.scss";
@@ -49,26 +45,27 @@ import "swiper/modules/pagination/pagination.min.css";
 export default {
   data() {
     return {
-      icons:[
+      icons: [
         "../assets/images/vegetables.png",
         "@/assets/images/fruits.png",
         "@/assets/images/rice.png",
       ],
       modules: [Navigation, Pagination],
-      product:[],
+      category: [],
+      product: [],
     };
   },
   components: {
     Swiper,
     SwiperSlide,
+    CategoryBtns,
   },
   methods: {
     getProduct() {
       const api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/products`;
-      this.$http.get(api)
-        .then((res) => {
-          console.log(res);
-        })
+      this.$http.get(api).then((res) => {
+        console.log(res);
+      });
     },
   },
   mounted() {
@@ -173,26 +170,5 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-.category{
-  .btn{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    letter-spacing: 1.5px;
-    border-radius: 10px;
-    box-shadow: 1px 0px 15px 1px rgba(240,240,240,1);
-    p{
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-      color: #9c9c9c;
-    }
-  }
-  .btn img{
-    max-width:5rem;
-    max-height:5rem;
-    margin:0.5rem 0;
-  }
 }
 </style>

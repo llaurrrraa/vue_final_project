@@ -31,6 +31,12 @@
         </swiper-slide>
       </swiper>
     </div>
+    <div class="category">
+      <button type="button" class="btn btn-light">
+        <img src="https://cdn-icons-png.flaticon.com/512/3099/3099663.png" alt="">
+        <p>蔬菜類</p>
+      </button>
+    </div>
   </div>
 </template>
 <script>
@@ -43,10 +49,10 @@ import "swiper/modules/pagination/pagination.min.css";
 export default {
   data() {
     return {
-      images: [
-        "https://images.unsplash.com/photo-1500595046743-cd271d694d30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2674&q=80",
-        "https://images.unsplash.com/photo-1611501355758-0d8b8208e1ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80",
-        "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80",
+      icons:[
+        "../assets/images/vegetables.png",
+        "@/assets/images/fruits.png",
+        "@/assets/images/rice.png",
       ],
       modules: [Navigation, Pagination],
       product:[],
@@ -58,7 +64,7 @@ export default {
   },
   methods: {
     getProduct() {
-      const api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_API_PATH}/admin/products`;
+      const api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/products`;
       this.$http.get(api)
         .then((res) => {
           console.log(res);
@@ -167,5 +173,20 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.category{
+  .btn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p{
+      margin-bottom: 0;
+    }
+  }
+  .btn img{
+    max-width:5rem;
+    max-height:5rem;
+  }
 }
 </style>

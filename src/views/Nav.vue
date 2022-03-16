@@ -70,7 +70,6 @@ export default {
       cartData: {
         carts: [],
       },
-      
     };
   },
   components: {

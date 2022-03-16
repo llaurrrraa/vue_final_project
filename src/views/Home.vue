@@ -127,8 +127,9 @@ export default {
     text-shadow: 0 0 2px #fff;
     margin-top: 1.5rem;
     span {
-      color: #fff;
-      text-shadow: 0 0 2px #000;
+      background-color: rgba(255,255,255,0.5);
+      color: #c15b07;
+      // text-shadow: 0 0 2px #000;
       border: 2px solid #fff;
       font-weight: 300;
       font-size: 3rem;

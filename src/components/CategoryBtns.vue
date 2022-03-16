@@ -67,14 +67,15 @@ export default {};
     letter-spacing: 1.5px;
     border-radius: 10px;
     box-shadow: 1px 0px 15px 1px rgba(240, 240, 240, 1);
+    padding:0.5rem 1.5rem;
     p {
-      margin-bottom: 0.5rem;
+      margin: 0.5rem 0;
       font-weight: 700;
       color: #9c9c9c;
     }
   }
   .btn img {
-    max-width: 5rem;
+    max-width: 4rem;
     max-height: 5rem;
     margin: 0.5rem 0;
   }

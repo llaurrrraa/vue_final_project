@@ -32,10 +32,17 @@
       </swiper>
     </div>
     <CategoryBtns />
+    <div class="sale">
+      <h5 class="my-5 subtitle">... 正在特價</h5>
+      <ProductCard 
+      :cardProduct="products"/>
+    </div>
   </div>
 </template>
 <script>
 import CategoryBtns from "@/components/CategoryBtns.vue";
+import ProductCard from "@/components/ProductCard.vue";
+
 import { Swiper, SwiperSlide } from "swiper/vue/swiper-vue";
 import { Navigation, Pagination } from "swiper";
 import "swiper/swiper.scss";
@@ -52,24 +59,25 @@ export default {
       ],
       modules: [Navigation, Pagination],
       category: [],
-      product: [],
+      products: [],
     };
   },
   components: {
     Swiper,
     SwiperSlide,
     CategoryBtns,
+    ProductCard,
   },
   methods: {
-    getProduct() {
+    getProducts() {
       const api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/products`;
       this.$http.get(api).then((res) => {
-        console.log(res);
+        this.products = res.data.products;
       });
     },
   },
   mounted() {
-    this.getProduct();
+    this.getProducts();
   },
 };
 </script>
@@ -127,7 +135,7 @@ export default {
     text-shadow: 0 0 2px #fff;
     margin-top: 1.5rem;
     span {
-      background-color: rgba(255,255,255,0.5);
+      background-color: rgba(255, 255, 255, 0.5);
       color: #c15b07;
       // text-shadow: 0 0 2px #000;
       border: 2px solid #fff;

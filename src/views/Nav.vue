@@ -54,6 +54,7 @@
       </div>
     </div>
   </nav>
+  <footer class="footer bg-light mt-auto"></footer>
   <router-view />
   <loading v-model:active="isLoading"></loading>
 </template>

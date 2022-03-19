@@ -7,43 +7,7 @@
       <main class="col main">
         <h6>所有產品</h6>
         <hr />
-        <!-- <div class="cards row row-cols-2 row-cols-lg-4">
-          <div class="col my-3" v-for="item in products" :key="item.id">
-            <div class="card h-260">
-              <div class="card-body">
-                <router-link :to="`/product/${item.id}`" class="router-link">
-                  <img
-                    :src="item.imageUrl"
-                    class="card-img-top"
-                    :alt="`${item.title}` + `Image`"
-                  />
-                  <div class="first-line mt-3 mb-2">
-                    <p class="card-title">{{ item.title }}</p>
-                    <p class="card-price">
-                      $ {{ item.price }} <span>/ {{ item.unit }}</span>
-                    </p>
-                  </div>
-                  <p class="card-text">
-                    {{ item.description }}<del>$ {{ item.origin_price }}</del>
-                  </p>
-                </router-link>
-              </div>
-              <div class="card-footer">
-                <div class="wrapper">
-                  <a class="minus" @click.prevent="minusCount()">－</a>
-                  <input class="num" value="1" />
-                  <a class="plus" @click.prevent="addCount(item.id)">＋</a>
-                </div>
-
-                <button class="btn" type="button" @click="addToCart(item.id)">
-                  <ShoppingBagIcon class="shoppingbag-icon h-5 w-5" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div> -->
-       <ProductCard 
-      :cardProduct="products"/>
+        
       </main>
     </div>
   </div>
@@ -58,7 +22,6 @@
   </loading>
 </template>
 <script>
-
 import ProductCard from "@/components/ProductCard.vue";
 import CategoryList from "@/components/CategoryList.vue";
 import emitter from "@/libraries/emitt.js";
@@ -76,8 +39,9 @@ export default {
     CategoryList,
   },
   methods: {
-    minusCount() {
+    minusCount(qty) {
       // 補
+      console.log(qty);
     },
     addCount(id) {
       // 補

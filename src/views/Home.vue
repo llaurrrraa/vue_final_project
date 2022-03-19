@@ -34,9 +34,28 @@
     <CategoryBtns />
     <div class="sale">
       <h5 class="my-5 subtitle">... 正在特價</h5>
-      <ProductCard 
-      :cardProduct="products"/>
+      <swiper
+        :modules="modules"
+        :slides-per-view="1"
+        :space-between="50"
+        :pagination="{ clickable: true }"
+        navigation
+      >
+        <swiper-slide>
+          <ProductCard 
+          :cardProduct="products"/>
+        </swiper-slide>
+        <swiper-slide>
+          <ProductCard 
+          :cardProduct="products"/>
+        </swiper-slide>
+      </swiper>
     </div>
+    <swiper>
+      <swiper-slide>123</swiper-slide>
+      <swiper-slide>123</swiper-slide>
+    </swiper>
+    <br><br><br>
   </div>
 </template>
 <script>
@@ -70,8 +89,9 @@ export default {
   },
   methods: {
     getProducts() {
-      const api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/products`;
+      const api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/products?category=蔬菜類`;
       this.$http.get(api).then((res) => {
+        console.log(res);
         this.products = res.data.products;
       });
     },

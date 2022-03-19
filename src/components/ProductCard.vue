@@ -1,10 +1,6 @@
 <template>
-  <div class="cards row row-cols-2 row-cols-lg-4">
-    <div
-      class="col my-3"
-      v-for="item in cardProduct"
-      :key="item.id"
-    >
+  <div class="cards row row-cols-2 row-cols-lg-4" ref="ii">
+    <div class="col my-3" v-for="item in cardProduct" :key="item.id">
       <div class="card h-260">
         <div class="card-body">
           <router-link :to="`/product/${item.id}`" class="router-link">
@@ -25,13 +21,17 @@
           </router-link>
         </div>
         <div class="card-footer">
-          <div class="wrapper">
-            <a class="minus" @click.prevent="minusCount()">－</a>
-            <input class="num" value="1" />
-            <a class="plus" @click.prevent="addCount(item.id)">＋</a>
+          <div class="wrapper" ref="count">
+            <a class="minus" @click="minus(item.id, qty - 1)">－</a>
+            <input type="text" class="num" v-model="qty" min="1" />
+            <a class="plus" @click="add(item.id, qty + 1)">＋</a>
           </div>
 
-          <button class="btn" type="button" @click="addToCart(item.id)">
+          <button
+            class="btn"
+            type="button"
+            @click="$emit('addToCart', item.id, qty)"
+          >
             <ShoppingBagIcon class="shoppingbag-icon h-5 w-5" />
           </button>
         </div>
@@ -45,12 +45,27 @@ import { ShoppingBagIcon } from "@heroicons/vue/outline";
 export default {
   data() {
     return {
-
+      product:[],
+      qty: 1,
     };
   },
   props: ["cardProduct"],
-  components:{
+  emits: ["add-to-cart"],
+  components: {
     ShoppingBagIcon,
+  },
+  methods: {
+    minus(id, count) {
+      this.qty = count;
+      console.log(id);
+    },
+    add(id, count) {
+      console.log(id);
+      this.qty = count;
+    },
+  },
+  mounted() {
+    console.log(this.$refs);
   },
 };
 </script>

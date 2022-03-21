@@ -206,6 +206,7 @@
 </template>
 <script>
 import modalMixins from "@/mixins/modalMixins";
+
 export default {
   data() {
     return {
@@ -217,11 +218,9 @@ export default {
   props: ["product", "isNew"],
   mixins: [modalMixins],
   emit: ["update-product"],
-  //   template: "#templateForProductModal"
   watch: {
     product() {
       this.tempProduct = this.product;
-      // console.log(this.tempProduct);
     },
   },
   methods: {
@@ -241,5 +240,12 @@ export default {
 <style lang="scss">
 * {
   font-family: "Rowdies", Noto Sans TC, cursive, sans-serif;
+}
+.modal-body{
+  strong span{
+    background-color: #65ffbf;
+    color:#0544f3;
+    padding:2px 5px;
+  }
 }
 </style>

@@ -66,7 +66,11 @@
                 >
                   編輯
                 </button>
-                <button type="button" class="btn btn-outline-danger btn-sm">
+                <button
+                  type="button"
+                  class="btn btn-outline-danger btn-sm"
+                  @click="openDelModal(item)"
+                >
                   刪除
                 </button>
               </div>
@@ -81,10 +85,16 @@
       :is-new="isNew"
       @update-product="updateProduct"
     ></ProductModal>
+    <DelModal 
+      :product="tempProduct"
+      ref="delModalref"
+      @del-product="delProduct"
+    ></DelModal>
   </div>
 </template>
 <script>
 import ProductModal from "@/components/ProductModal.vue";
+import DelModal from "@/components/DelModal.vue";
 export default {
   data() {
     return {
@@ -97,6 +107,7 @@ export default {
   },
   components: {
     ProductModal,
+    DelModal,
   },
   methods: {
     getProducts() {
@@ -112,12 +123,16 @@ export default {
           imagesUrl: [],
         };
         this.isNew = true;
-      } else if (status === "edit") {
-        this.tempProduct = { ...item };
-        this.isNew = false;
-      }
+      } else status === "edit";
+      this.tempProduct = { ...item };
+      this.isNew = false;
       const modalComponent = this.$refs.productModalref;
       modalComponent.openModal();
+    },
+    openDelModal(item) {
+      this.tempProduct = { ...item };
+      const delModalComponent = this.$refs.delModalref;
+      delModalComponent.openModal();
     },
     updateProduct() {
       let api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product`;
@@ -134,6 +149,19 @@ export default {
         modalComponent.hideModal();
       });
     },
+    delProduct(){
+      // console.log(this.tempProduct);
+      const api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.tempProduct.id}`;
+      this.$http.delete(api)
+        .then((res) => {
+          console.log(res);
+          const delModalComponent = this.$refs.delModalref;
+          delModalComponent.hideModal();
+        })
+        .catch((err) => {
+          console.dir(err);
+        })
+    }
   },
   mounted() {
     this.getProducts();

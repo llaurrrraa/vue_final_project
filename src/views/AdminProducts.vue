@@ -66,7 +66,11 @@
                 >
                   編輯
                 </button>
-                <button type="button" class="btn btn-outline-danger btn-sm">
+                <button
+                  type="button"
+                  class="btn btn-outline-danger btn-sm"
+                  @click="openDelModal(item)"
+                >
                   刪除
                 </button>
               </div>
@@ -79,12 +83,18 @@
       :product="tempProduct"
       ref="productModalref"
       :is-new="isNew"
-      @get-product="getProducts"
+      @update-product="updateProduct"
     ></ProductModal>
+    <DelModal 
+      :product="tempProduct"
+      ref="delModalref"
+      @del-product="delProduct"
+    ></DelModal>
   </div>
 </template>
 <script>
 import ProductModal from "@/components/ProductModal.vue";
+import DelModal from "@/components/DelModal.vue";
 export default {
   data() {
     return {
@@ -97,6 +107,7 @@ export default {
   },
   components: {
     ProductModal,
+    DelModal,
   },
   methods: {
     getProducts() {
@@ -112,23 +123,45 @@ export default {
           imagesUrl: [],
         };
         this.isNew = true;
-      } else if (status === "edit") {
-        this.tempProduct = { ...item };
-        // console.log(this.tempProduct);
-        // this.temProduct = { ...product };
-        // console.log(this.tempProduct);
-      }
+      } else status === "edit";
+      this.tempProduct = { ...item };
+      this.isNew = false;
       const modalComponent = this.$refs.productModalref;
       modalComponent.openModal();
     },
-    // updateProduct() {
-    //   const api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product`;
-    //   let method = "post";
-    //   if (!isNew) {
-    //     api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.tempProduct.id}`;
-    //     method = put;
-    //   }
-    // },
+    openDelModal(item) {
+      this.tempProduct = { ...item };
+      const delModalComponent = this.$refs.delModalref;
+      delModalComponent.openModal();
+    },
+    updateProduct() {
+      let api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product`;
+      let method = "post";
+      if (!this.isNew) {
+        api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.tempProduct.id}`;
+        method = "put";
+        console.log("edit");
+      }
+      this.$http[method](api, { data: this.tempProduct }).then((res) => {
+        console.log(res);
+        this.getProducts();
+        const modalComponent = this.$refs.productModalref;
+        modalComponent.hideModal();
+      });
+    },
+    delProduct(){
+      // console.log(this.tempProduct);
+      const api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.tempProduct.id}`;
+      this.$http.delete(api)
+        .then((res) => {
+          console.log(res);
+          const delModalComponent = this.$refs.delModalref;
+          delModalComponent.hideModal();
+        })
+        .catch((err) => {
+          console.dir(err);
+        })
+    }
   },
   mounted() {
     this.getProducts();

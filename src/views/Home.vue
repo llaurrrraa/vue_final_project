@@ -83,7 +83,7 @@ export default {
       this.$http.get(api).then((res) => {
         this.products = res.data.products.map((product) => {
           product.qty = 0;
-          console.log('product',product);
+          console.log("product", product);
           return product;
         });
       });
@@ -193,10 +193,10 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.sale{
-  .sub-title{
+.sale {
+  .sub-title {
     font-weight: 700;
-    color:#9C9C9C;
+    color: #9c9c9c;
     letter-spacing: 2.5px;
   }
 }

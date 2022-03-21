@@ -48,11 +48,11 @@ export default {
         .then((res) => {
           this.isLoading = false;
           this.products = res.data.products.reduce((init, current) => {
-           current.qty = 1;
-           init.push(current);
-          return init;
+            current.qty = 1;
+            init.push(current);
+            return init;
           }, []);
-            console.log(`products`, this.products);
+          console.log(`products`, this.products);
         });
     },
     addToCart(id, count = 1) {

@@ -132,15 +132,17 @@
                   type="text"
                   class="form-control"
                   id="mainImgUrl"
+                  v-model="tempProduct.imageUrl"
                   placeholder="please enter imageUrl"
                 />
-                <img class="img-fluid mt-2" :src="product.imageUrl" />
-                <label for="localUpload" class="mt-3">或本地上傳</label>
+                <img class="img-fluid mt-2" :src="tempProduct.imageUrl" />
+                <label for="localUpload" class="mt-3">或 上傳圖片</label>
                 <input
                   type="file"
                   class="form-control mt-2"
                   id="localUpload"
                   placeholder="請輸入圖片連結"
+                  ref="inputFile"
                   @change="localImg"
                 />
                 <img class="img-fluid mt-2" :src="imgUrl" />
@@ -149,10 +151,7 @@
               <h5>多圖新增</h5>
               <!-- 是不是陣列的方法（ Array.isArray ），如果是陣列才會跑迴圈 -->
               <div v-if="Array.isArray(product.imagesUrl)">
-                <div
-                  v-for="(image, key) in product.imagesUrl"
-                  :key="key + '123'"
-                >
+                <div v-for="(image, key) in product.imagesUrl" :key="key + '1'">
                   <div class="mb-3">
                     <input
                       type="text"
@@ -177,7 +176,7 @@
                   <button class="btn btn-outline-danger btn-sm d-block w-100">
                     刪除圖片
                   </button>
-                </div> 
+                </div>
               </div>
               <div v-else>
                 <button
@@ -198,7 +197,13 @@
           >
             取消
           </button>
-          <button type="button" class="btn btn-primary" @click="$emit('update-product',tempProduct)">確認</button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="$emit('update-product', tempProduct)"
+          >
+            確認
+          </button>
         </div>
       </div>
     </div>
@@ -224,16 +229,18 @@ export default {
     },
   },
   methods: {
-    // localImg(event) {
-    //   // console.log(event.target.files);
-    //   this.file = event.target.files[0];
-    //   this.imgUrl = URL.createObjectURL(this.file);
-    //   // console.log(this.imgUrl);
-    // },
-    // addNewImg() {
-    //   this.tempProduct.imagesUrl = [];
-    //   this.tempProduct.imagesUrl.push("");
-    // },
+    localImg() {
+      const uploadFile = this.$refs.inputFile[0];
+      const formData = new formData();
+      formData.append('file-to-upload',uploadFile);
+      // this.file = event.target.files[0];
+      // this.imgUrl = URL.createObjectURL(this.file);
+      // console.log(this.imgUrl);
+    },
+    addNewImg() {
+      this.tempProduct.imagesUrl = [];
+      this.tempProduct.imagesUrl.push("");
+    },
   },
 };
 </script>
@@ -241,11 +248,11 @@ export default {
 * {
   font-family: "Rowdies", Noto Sans TC, cursive, sans-serif;
 }
-.modal-body{
-  strong span{
+.modal-body {
+  strong span {
     background-color: #65ffbf;
-    color:#0544f3;
-    padding:2px 5px;
+    color: #0544f3;
+    padding: 2px 5px;
   }
 }
 </style>

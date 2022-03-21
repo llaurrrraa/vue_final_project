@@ -11,7 +11,9 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title" id="exampleModalLabel" >移除 {{product.title}} </h5>
+          <h5 class="modal-title" id="exampleModalLabel">
+            移除 {{ product.title }}
+          </h5>
           <button
             type="button"
             class="btn-close"
@@ -20,23 +22,29 @@
           ></button>
         </div>
         <div class="modal-body">
-            <strong>
-            確定刪除 
-                <span>
-                    {{product.title}}
-                </span> 
+          <strong>
+            確定刪除
+            <span>
+              {{ product.title }}
+            </span>
             嗎？
-            </strong>
+          </strong>
         </div>
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-outline-secondary"
+            class="btn btn-secondary"
             data-bs-dismiss="modal"
           >
             取消
           </button>
-          <button type="button" class="btn btn-danger" @click="$emit('del-product')">刪除</button>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            @click="$emit('del-product')"
+          >
+            刪除
+          </button>
         </div>
       </div>
     </div>
@@ -50,6 +58,6 @@ export default {
   },
   props: ["product"],
   mixins: [modalMixins],
-  emit:["del-product"],
+  emit: ["del-product"],
 };
 </script>

@@ -85,7 +85,7 @@
       :is-new="isNew"
       @update-product="updateProduct"
     ></ProductModal>
-    <DelModal 
+    <DelModal
       :product="tempProduct"
       ref="delModalref"
       @del-product="delProduct"
@@ -119,13 +119,14 @@ export default {
     },
     openModal(status, item) {
       if (status === "isNew") {
+        this.isNew = true;
         this.tempProduct = {
           imagesUrl: [],
         };
-        this.isNew = true;
-      } else status === "edit";
-      this.tempProduct = { ...item };
-      this.isNew = false;
+      } else if (status === "edit") {
+        this.tempProduct = { ...item };
+        this.isNew = false;
+      }
       const modalComponent = this.$refs.productModalref;
       modalComponent.openModal();
     },
@@ -135,33 +136,33 @@ export default {
       delModalComponent.openModal();
     },
     updateProduct() {
-      let api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product`;
-      let method = "post";
-      if (!this.isNew) {
-        api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.tempProduct.id}`;
-        method = "put";
-        console.log("edit");
+      let api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.tempProduct.id}`;
+      let method = "put";
+      if (this.isNew) {
+        api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product`;
+        method = "post";
       }
       this.$http[method](api, { data: this.tempProduct }).then((res) => {
         console.log(res);
-        this.getProducts();
         const modalComponent = this.$refs.productModalref;
         modalComponent.hideModal();
       });
+      this.getProducts();
     },
-    delProduct(){
+    delProduct() {
       // console.log(this.tempProduct);
       const api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.tempProduct.id}`;
-      this.$http.delete(api)
-        .then((res) => {
-          console.log(res);
+      this.$http
+        .delete(api)
+        .then(() => {
           const delModalComponent = this.$refs.delModalref;
           delModalComponent.hideModal();
+          this.getProducts();
         })
         .catch((err) => {
           console.dir(err);
-        })
-    }
+        });
+    },
   },
   mounted() {
     this.getProducts();

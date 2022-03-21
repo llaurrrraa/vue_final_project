@@ -33,35 +33,25 @@
     </div>
     <CategoryBtns />
     <div class="sale">
-      <h5 class="my-5 subtitle">... 正在特價</h5>
+      <h5 class="my-5 sub-title">... 正在特價</h5>
       <swiper
         :modules="modules"
-        :slides-per-view="1"
+        :slides-per-view="4"
         :space-between="50"
         :pagination="{ clickable: true }"
         navigation
       >
-        <swiper-slide>
-          <ProductCard 
-          :cardProduct="products"/>
-        </swiper-slide>
-        <swiper-slide>
-          <ProductCard 
-          :cardProduct="products"/>
+        <swiper-slide v-for="item in products" :key="item.id">
+          <ProductCard :card-product="[item]" />
         </swiper-slide>
       </swiper>
     </div>
-    <swiper>
-      <swiper-slide>123</swiper-slide>
-      <swiper-slide>123</swiper-slide>
-    </swiper>
-    <br><br><br>
+    <br /><br /><br />
   </div>
 </template>
 <script>
 import CategoryBtns from "@/components/CategoryBtns.vue";
 import ProductCard from "@/components/ProductCard.vue";
-
 import { Swiper, SwiperSlide } from "swiper/vue/swiper-vue";
 import { Navigation, Pagination } from "swiper";
 import "swiper/swiper.scss";
@@ -89,10 +79,13 @@ export default {
   },
   methods: {
     getProducts() {
-      const api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/products?category=蔬菜類`;
+      const api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/products`;
       this.$http.get(api).then((res) => {
-        console.log(res);
-        this.products = res.data.products;
+        this.products = res.data.products.map((product) => {
+          product.qty = 0;
+          console.log('product',product);
+          return product;
+        });
       });
     },
   },
@@ -199,5 +192,12 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.sale{
+  .sub-title{
+    font-weight: 700;
+    color:#9C9C9C;
+    letter-spacing: 2.5px;
+  }
 }
 </style>

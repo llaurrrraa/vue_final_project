@@ -7,7 +7,7 @@
       <main class="col main">
         <h6>所有產品</h6>
         <hr />
-        
+        <ProductCard :cardProduct="products" @add-to-cart="addToCart" />
       </main>
     </div>
   </div>
@@ -39,14 +39,6 @@ export default {
     CategoryList,
   },
   methods: {
-    minusCount(qty) {
-      // 補
-      console.log(qty);
-    },
-    addCount(id) {
-      // 補
-      console.log(id);
-    },
     getProducts() {
       this.isLoading = true;
       this.$http
@@ -54,9 +46,13 @@ export default {
           `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/products/all`
         )
         .then((res) => {
-          // console.log(res);
           this.isLoading = false;
-          this.products = res.data.products;
+          this.products = res.data.products.reduce((init, current) => {
+           current.qty = 1;
+           init.push(current);
+          return init;
+          }, []);
+            console.log(`products`, this.products);
         });
     },
     addToCart(id, count = 1) {

@@ -79,7 +79,7 @@
       :product="tempProduct"
       ref="productModalref"
       :is-new="isNew"
-      @get-product="getProducts"
+      @update-product="updateProduct"
     ></ProductModal>
   </div>
 </template>
@@ -114,21 +114,26 @@ export default {
         this.isNew = true;
       } else if (status === "edit") {
         this.tempProduct = { ...item };
-        // console.log(this.tempProduct);
-        // this.temProduct = { ...product };
-        // console.log(this.tempProduct);
+        this.isNew = false;
       }
       const modalComponent = this.$refs.productModalref;
       modalComponent.openModal();
     },
-    // updateProduct() {
-    //   const api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product`;
-    //   let method = "post";
-    //   if (!isNew) {
-    //     api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.tempProduct.id}`;
-    //     method = put;
-    //   }
-    // },
+    updateProduct() {
+      let api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product`;
+      let method = "post";
+      if (!this.isNew) {
+        api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.tempProduct.id}`;
+        method = "put";
+        console.log("edit");
+      }
+      this.$http[method](api, { data: this.tempProduct }).then((res) => {
+        console.log(res);
+        this.getProducts();
+        const modalComponent = this.$refs.productModalref;
+        modalComponent.hideModal();
+      });
+    },
   },
   mounted() {
     this.getProducts();

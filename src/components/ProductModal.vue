@@ -177,7 +177,7 @@
                   <button class="btn btn-outline-danger btn-sm d-block w-100">
                     刪除圖片
                   </button>
-                </div>
+                </div> 
               </div>
               <div v-else>
                 <button
@@ -198,7 +198,7 @@
           >
             取消
           </button>
-          <button type="button" class="btn btn-primary">確認</button>
+          <button type="button" class="btn btn-primary" @click="$emit('update-product',tempProduct)">確認</button>
         </div>
       </div>
     </div>
@@ -216,7 +216,7 @@ export default {
   },
   props: ["product", "isNew"],
   mixins: [modalMixins],
-  //   emit: ["update-product"],,
+  emit: ["update-product"],
   //   template: "#templateForProductModal"
   watch: {
     product() {
@@ -231,17 +231,6 @@ export default {
     //   this.imgUrl = URL.createObjectURL(this.file);
     //   // console.log(this.imgUrl);
     // },
-    // updateProduct() {
-    //   const api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_API_PATH}/admin/product`;
-    //   this.$http
-    //     .post(api)
-    //     .then((res) => {
-    //       console.log(res);
-    //     })
-    //     .catch((err) => {
-    //       alert(err.data.message);
-    //     });
-    // },
     // addNewImg() {
     //   this.tempProduct.imagesUrl = [];
     //   this.tempProduct.imagesUrl.push("");
@@ -249,3 +238,8 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+* {
+  font-family: "Rowdies", Noto Sans TC, cursive, sans-serif;
+}
+</style>

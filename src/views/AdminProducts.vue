@@ -136,16 +136,17 @@ export default {
       delModalComponent.openModal();
     },
     updateProduct() {
-      let api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.tempProduct.id}`;
+      let api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.tempProduct.id}`;
       let method = "put";
       if (this.isNew) {
-        api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product`;
+        api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/admin/product`;
         method = "post";
       }
-      this.$http[method](api, { data: this.tempProduct }).then((res) => {
-        console.log(res);
+      this.$http[method](api, { data: this.tempProduct }).then(() => {
+        // console.log(res);
         const modalComponent = this.$refs.productModalref;
         modalComponent.hideModal();
+        this.getProducts();
       });
       this.getProducts();
     },

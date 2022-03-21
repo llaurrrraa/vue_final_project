@@ -145,7 +145,7 @@
                   ref="inputFile"
                   @change="localImg"
                 />
-                <img class="img-fluid mt-2" :src="imgUrl" />
+                <img class="img-fluid mt-2" :src="imageUrl" />
               </div>
               <hr />
               <h5>多圖新增</h5>
@@ -215,7 +215,7 @@ import modalMixins from "@/mixins/modalMixins";
 export default {
   data() {
     return {
-      imgUrl: null,
+      imageUrl: "",
       file: "",
       tempProduct: {},
     };
@@ -230,9 +230,19 @@ export default {
   },
   methods: {
     localImg() {
-      const uploadFile = this.$refs.inputFile[0];
-      const formData = new formData();
-      formData.append('file-to-upload',uploadFile);
+      const uploadFile = this.$refs.inputFile.files[0];
+      const formData = new FormData();
+      console.log(uploadFile);
+      formData.append('file-to-upload', uploadFile);
+      // console.log(formData);
+      const url = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/admin/upload`;
+      this.$http.post(url, formData, { headers:{'Content-Type': 'multipart/form-data',} })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.dir(err);
+        })
       // this.file = event.target.files[0];
       // this.imgUrl = URL.createObjectURL(this.file);
       // console.log(this.imgUrl);

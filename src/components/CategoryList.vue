@@ -5,43 +5,43 @@
         href="/advApi/adv-refs.html"
         class="list-group-item list-group-item-action"
       >
-        ｜ 蔬菜類
+       🥬 ｜ 蔬菜類
       </a>
       <a
         href="/advApi/adv-teleport.html"
         class="list-group-item list-group-item-action"
       >
-        ｜ 水果類
+        🍎 ｜ 水果類
       </a>
       <a
         href="/advApi/adv-teleport.html"
         class="list-group-item list-group-item-action"
       >
-        ｜ 肉製品
+        🥩 ｜ 肉製品
       </a>
       <a
         href="/advApi/adv-teleport.html"
         class="list-group-item list-group-item-action"
       >
-        ｜ 乳製品
+        🥛 ｜ 乳製品
       </a>
       <a
         href="/advApi/adv-teleport.html"
         class="list-group-item list-group-item-action"
       >
-        ｜ 植栽類
+        🪴 ｜ 植栽類
       </a>
       <a
         href="/advApi/adv-teleport.html"
         class="list-group-item list-group-item-action"
       >
-        ｜ 食品雜糧
+        🍚 ｜ 食品雜糧
       </a>
       <a
         href="/advApi/adv-provide.html"
         class="list-group-item list-group-item-action"
       >
-        ｜ 小農特製
+        🧑‍🌾 ｜ 小農特製
       </a>
     </div>
   </div>
@@ -54,9 +54,10 @@ export default {};
 <style lang="scss">
 .list-group {
   a {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 300;
     letter-spacing: 1px;
+    padding: 1rem;
   }
   a:hover {
     font-weight: 700;

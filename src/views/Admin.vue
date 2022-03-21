@@ -46,7 +46,7 @@
       <div class="navbar-text me-5">
         <div class="bd-highlight nav-item ms-3">
           <button class="btn btn-outline-primary me-3">
-            <router-link to="/" class="router-link-right">
+            <router-link to="/home" class="router-link-right">
               &#60; 返回前台</router-link
             >
           </button>

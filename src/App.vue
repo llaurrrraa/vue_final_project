@@ -8,5 +8,6 @@
 
 * {
   font-family: "Rowdies", Noto Sans TC, cursive, sans-serif;
+  box-sizing: border-box;
 }
 </style>

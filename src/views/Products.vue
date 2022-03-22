@@ -2,13 +2,15 @@
   <div class="container mt-5">
     <div class="row">
       <aside class="col-md-2 aside me-1">
-        <CategoryList></CategoryList>
+        <CategoryList @change-category="getProducts"></CategoryList>
       </aside>
       <main class="col main">
-        <h6>所有產品</h6>
+        <h6 v-if="categoryTitle != ''">
+          {{ categoryTitle }}
+        </h6>
+        <h6 v-else>所有產品</h6>
         <hr />
         <ProductCard :cardProduct="products" @add-to-cart="addToCart" />
-        <Pagination :pages="pagination" class="mt-2" @update-page="getProducts" />
       </main>
     </div>
   </div>
@@ -25,7 +27,6 @@
 <script>
 import ProductCard from "@/components/ProductCard.vue";
 import CategoryList from "@/components/CategoryList.vue";
-import Pagination from "@/components/Pagination.vue";
 import emitter from "@/libraries/emitt.js";
 
 export default {
@@ -34,34 +35,29 @@ export default {
       products: [],
       isLoading: false,
       isLoadingItem: "",
-      pagination: {},
-      currentPage:1,
+      categoryTitle: "",
     };
   },
   components: {
     ProductCard,
     CategoryList,
-    Pagination,
   },
   methods: {
-    getProducts(page = 1) {
-      this.currentPage = page;
+    getProducts(category) {
       this.isLoading = true;
-      this.$http
-        .get(
-          `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/products?page=${page}`
-        )
-        .then((res) => {
-          this.pagination = res.data.pagination;
-          console.log(this.pagination);
-          this.isLoading = false;
-          this.products = res.data.products.reduce((init, current) => {
-            current.qty = 1;
-            init.push(current);
-            return init;
-          }, []);
-          console.log(`products`, this.products);
-        });
+      let api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/products/all`;
+      if (category) {
+        api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/products?category=${category}`;
+        this.categoryTitle = category;
+      }
+      this.$http.get(api).then((res) => {
+        this.isLoading = false;
+        this.products = res.data.products.reduce((init, current) => {
+          current.qty = 1;
+          init.push(current);
+          return init;
+        }, []);
+      });
     },
     addToCart(id, count = 1) {
       const data = {

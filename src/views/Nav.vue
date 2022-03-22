@@ -1,13 +1,13 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">
+      <router-link class="navbar-brand" to="/home">
         <img
           src="../assets/images/icons/auntieTsai02-icon.png"
           height="60"
           class="d-inline-block align-text-top"
         />
-      </a>
+      </router-link>
       <button
         class="navbar-toggler"
         type="button"

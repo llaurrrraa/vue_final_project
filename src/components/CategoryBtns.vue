@@ -42,6 +42,7 @@ export default {
 </script>
 <style lang="scss">
 .category {
+  max-width: 1220px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -66,4 +67,17 @@ export default {
     margin: 0.5rem 0;
   }
 }
+@media (max-width: 768px) { 
+  .category{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .btn{
+      padding:1rem 1.2rem;
+      img{
+        max-width:3rem;
+      }
+    }
+  }
+ }
 </style>

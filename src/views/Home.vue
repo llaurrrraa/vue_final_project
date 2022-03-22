@@ -1,5 +1,5 @@
 <template>
-  <div class="container home-banner">
+  <div class="container">
     <div class="swiper my-5">
       <swiper
         :modules="modules"
@@ -45,6 +45,35 @@
           <ProductCard :card-product="[item]" />
         </swiper-slide>
       </swiper>
+    </div>
+    <div class="concept row-col-3">
+      <div class="trade-card col-3">
+        <div class="card-body">
+          <h2 class="card-title">- 公平交易 -</h2>
+          <p class="hover-card-text">
+            小農的用心耕作與消費者能夠安心選購，在價格上我們或許不是最便宜，卻不願讓任何一邊受委屈，
+            阿姨的堅持，讓小農笑得開心、希望您也吃得安心。
+          </p>
+        </div>
+      </div>
+      <div class="nice-card col-3">
+        <div class="card-body">
+          <h2 class="card-title">- 友善耕作 -</h2>
+          <p class="hover-card-text">
+            為了保護土地和生態系，使用最接近大自然原始的方式務農，
+            減少人為破壞、讓土地永續經營、生生不息。
+          </p>
+        </div>
+      </div>
+      <div class="organic-card col-3">
+        <div class="card-body">
+          <h2 class="card-title">- 有機農業 -</h2>
+          <p class="hover-card-text">
+            不污染環境、不破壞生態，我們與採用有機方式生產的小農合作，
+            提供消費者最健康與安全的農產品。
+          </p>
+        </div>
+      </div>
     </div>
     <br /><br /><br />
   </div>
@@ -94,9 +123,12 @@ export default {
 };
 </script>
 <style lang="scss">
-.home-banner {
-  max-width: 1440px;
+html,body{
+  width:100%;
 }
+// .home-banner {
+//   max-width: 1440px;
+// }
 .swiper-button-prev,
 .swiper-button-next {
   background-color: rgba(0, 0, 0, 0.3);
@@ -193,10 +225,108 @@ export default {
   align-items: center;
 }
 .sale {
+  margin-bottom: 5rem;
   .sub-title {
     font-weight: 700;
     color: #9c9c9c;
     letter-spacing: 2.5px;
+  }
+}
+.concept {
+  margin-top: 6rem;
+  display: flex;
+  justify-content: space-around;
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.35s ease;
+    h2 {
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 0.8rem 2rem;
+      border-radius: 10px;
+    }
+  }
+  .trade-card {
+    background-image: url(../assets/images/trade.jpeg);
+  }
+  .nice-card {
+    background-image: url(../assets/images/kind-farm.jpeg);
+  }
+  .organic-card {
+    background-image: url(../assets/images/organic.jpeg);
+  }
+  .trade-card,
+  .nice-card,
+  .organic-card {
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    padding: 3rem 2rem;
+    border-radius: 15px;
+    color: #fff;
+    opacity: 0.5;
+    .hover-card-text {
+      font-weight: 700;
+      overflow: hidden;
+      max-height: 0;
+      transform: translateY(1em);
+      transition: all 0.55s ease;
+      letter-spacing: 1px;
+      padding:5px 10px;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #65ffbf;
+      height: 4px;
+    }
+    &::before {
+      width: 0;
+      opacity: 0;
+      transition: opacity 0 ease, width 0 ease;
+      transition-delay: 5s;
+    }
+
+    &::after {
+      width: 100%;
+      background: white;
+      transition: width 0.5s ease;
+    }
+    &:hover {
+      box-shadow: 0 10px 20px 0 rgba(#202024, 0.12);
+      opacity: 1;
+      transition-duration: 5s;
+
+      &::before {
+        width: 100%;
+        opacity: 1;
+        transition: opacity 0.8s ease, width 0.8s ease;
+        transition-delay: 0;
+      }
+
+      &::after {
+        width: 0;
+        opacity: 0;
+        transition: width 0 ease;
+      }
+
+      .hover-card-text {
+        max-height: 10em;
+        transform: none;
+        background-color: #fff;
+        color:#000;
+      }
+    }
   }
 }
 </style>

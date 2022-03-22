@@ -8,6 +8,7 @@
         <h6>所有產品</h6>
         <hr />
         <ProductCard :cardProduct="products" @add-to-cart="addToCart" />
+        <Pagination :pages="pagination" class="mt-2" @update-page="getProducts" />
       </main>
     </div>
   </div>
@@ -24,6 +25,7 @@
 <script>
 import ProductCard from "@/components/ProductCard.vue";
 import CategoryList from "@/components/CategoryList.vue";
+import Pagination from "@/components/Pagination.vue";
 import emitter from "@/libraries/emitt.js";
 
 export default {
@@ -32,20 +34,26 @@ export default {
       products: [],
       isLoading: false,
       isLoadingItem: "",
+      pagination: {},
+      currentPage:1,
     };
   },
   components: {
     ProductCard,
     CategoryList,
+    Pagination,
   },
   methods: {
-    getProducts() {
+    getProducts(page = 1) {
+      this.currentPage = page;
       this.isLoading = true;
       this.$http
         .get(
-          `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/products/all`
+          `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/products?page=${page}`
         )
         .then((res) => {
+          this.pagination = res.data.pagination;
+          console.log(this.pagination);
           this.isLoading = false;
           this.products = res.data.products.reduce((init, current) => {
             current.qty = 1;

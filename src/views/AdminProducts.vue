@@ -1,6 +1,6 @@
 <template>
   <div class="container-lg my-4 ap">
-    <div class="ap-title my-3">
+    <div class="ap-title my-5">
       <h5 class="ap-h5">後台產品列表</h5>
       <button
         type="button"
@@ -10,7 +10,7 @@
         建立新產品
       </button>
     </div>
-    <div class="table-responsive mt-3 ap-table">
+    <div class="table-responsive mt-5 ap-table">
       <table class="table table-hover">
         <thead>
           <tr>
@@ -71,6 +71,7 @@
         </tbody>
       </table>
     </div>
+    <Pagination :pages="pagination" @update-page="getProducts"/>
     <ProductModal
       :product="tempProduct"
       ref="productModalref"
@@ -87,6 +88,7 @@
 <script>
 import ProductModal from "@/components/ProductModal.vue";
 import DelModal from "@/components/DelModal.vue";
+import Pagination from '../components/Pagination.vue';
 export default {
   data() {
     return {
@@ -95,17 +97,22 @@ export default {
         imagesUrl: [],
       },
       isNew: false,
+      pagination:{},
+      currentPage:1,
     };
   },
   components: {
     ProductModal,
     DelModal,
+    Pagination,
   },
   methods: {
-    getProducts() {
-      const api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/admin/products/all`;
+    getProducts(page = 1) {
+      this.currentPage = page;
+      const api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/admin/products?page=${page}`;
       this.$http.get(api).then((res) => {
         this.products = res.data.products;
+        this.pagination = res.data.pagination;
       });
     },
     openModal(status, item) {

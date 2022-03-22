@@ -1,2 +1,2 @@
-# week6_HW
+# hex_school final project
  

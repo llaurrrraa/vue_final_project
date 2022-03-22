@@ -2,10 +2,13 @@
   <div class="container mt-5">
     <div class="row">
       <aside class="col-md-2 aside me-1">
-        <CategoryList></CategoryList>
+        <CategoryList @change-category="getProducts"></CategoryList>
       </aside>
       <main class="col main">
-        <h6>所有產品</h6>
+        <h6 v-if="categoryTitle != ''">
+          {{ categoryTitle }}
+        </h6>
+        <h6 v-else>所有產品</h6>
         <hr />
         <ProductCard :cardProduct="products" @add-to-cart="addToCart" />
       </main>
@@ -32,6 +35,7 @@ export default {
       products: [],
       isLoading: false,
       isLoadingItem: "",
+      categoryTitle: "",
     };
   },
   components: {
@@ -39,21 +43,21 @@ export default {
     CategoryList,
   },
   methods: {
-    getProducts() {
+    getProducts(category) {
       this.isLoading = true;
-      this.$http
-        .get(
-          `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/products/all`
-        )
-        .then((res) => {
-          this.isLoading = false;
-          this.products = res.data.products.reduce((init, current) => {
-            current.qty = 1;
-            init.push(current);
-            return init;
-          }, []);
-          console.log(`products`, this.products);
-        });
+      let api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/products/all`;
+      if (category) {
+        api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/products?category=${category}`;
+        this.categoryTitle = category;
+      }
+      this.$http.get(api).then((res) => {
+        this.isLoading = false;
+        this.products = res.data.products.reduce((init, current) => {
+          current.qty = 1;
+          init.push(current);
+          return init;
+        }, []);
+      });
     },
     addToCart(id, count = 1) {
       const data = {

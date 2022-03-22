@@ -145,7 +145,7 @@
                   ref="inputFile"
                   @change="localImg"
                 />
-                <img class="img-fluid mt-2" :src="tempProduct.imageUrl" />
+                <img class="img-fluid mt-2" :src="imageUrl" />
               </div>
               <hr />
               <h5>多圖新增</h5>

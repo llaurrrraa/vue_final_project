@@ -2,43 +2,49 @@
   <div class="sticky-top" style="top: 76px">
     <div class="list-group list-group-flush">
       <a
-        href="/advApi/adv-refs.html"
+        @click.prevent="changeProducts()"
+        class="cl-all list-group-item list-group-item-action"
+      >
+        👜 ｜ 全部
+      </a>
+      <a
+        @click.prevent="changeProducts('蔬菜類')"
         class="list-group-item list-group-item-action"
       >
         🥬 ｜ 蔬菜類
       </a>
       <a
-        href="/advApi/adv-teleport.html"
+        @click.prevent="changeProducts('水果類')"
         class="list-group-item list-group-item-action"
       >
         🍎 ｜ 水果類
       </a>
       <a
-        href="/advApi/adv-teleport.html"
+        @click.prevent="changeProducts('肉製品')"
         class="list-group-item list-group-item-action"
       >
         🥩 ｜ 肉製品
       </a>
       <a
-        href="/advApi/adv-teleport.html"
+        @click.prevent="changeProducts('乳製品')"
         class="list-group-item list-group-item-action"
       >
         🥛 ｜ 乳製品
       </a>
       <a
-        href="/advApi/adv-teleport.html"
+        @click.prevent="changeProducts('植栽類')"
         class="list-group-item list-group-item-action"
       >
         🪴 ｜ 植栽類
       </a>
       <a
-        href="/advApi/adv-teleport.html"
+        @click.prevent="changeProducts('食品雜糧')"
         class="list-group-item list-group-item-action"
       >
         🍚 ｜ 食品雜糧
       </a>
       <a
-        href="/advApi/adv-provide.html"
+        @click.prevent="changeProducts('小農特製')"
         class="list-group-item list-group-item-action"
       >
         🧑‍🌾 ｜ 小農特製
@@ -48,7 +54,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    changeProducts(category) {
+      this.$emit("change-category", category);
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -58,6 +70,9 @@ export default {};
     font-weight: 300;
     letter-spacing: 1px;
     padding: 1rem;
+  }
+  a.cl-all {
+    font-weight: 700;
   }
   a:hover {
     font-weight: 700;

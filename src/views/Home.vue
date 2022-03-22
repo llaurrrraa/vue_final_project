@@ -31,13 +31,13 @@
         </swiper-slide>
       </swiper>
     </div>
-    <CategoryBtns />
-    <div class="sale">
-      <h5 class="my-5 sub-title">... 正在特價</h5>
+    <CategoryBtns class="my-3" />
+    <div class="sale my-5">
+      <h5 class="sub-title">你要的阿姨都有賣..</h5>
       <swiper
         :modules="modules"
-        :slides-per-view="4"
-        :space-between="50"
+        :slides-per-view="5"
+        :space-between="30"
         :pagination="{ clickable: true }"
         navigation
       >
@@ -79,11 +79,10 @@ export default {
   },
   methods: {
     getProducts() {
-      const api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/products`;
+      let api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/products`;
       this.$http.get(api).then((res) => {
         this.products = res.data.products.map((product) => {
-          product.qty = 0;
-          console.log("product", product);
+          product.qty = 1;
           return product;
         });
       });

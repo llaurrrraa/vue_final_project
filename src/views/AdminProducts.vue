@@ -33,8 +33,6 @@
             <td>{{ item.origin_price }}</td>
             <td>{{ item.price }}</td>
             <td>
-              <!-- <span v-if="item.is_enabled">上架中</span>
-              <span v-else class="text-secondary">未啟用</span> -->
               <div v-if="item.is_enabled === 1" class="form-check form-switch">
                 <input
                   class="form-check-input"
@@ -42,9 +40,6 @@
                   id="flexSwitchCheckChecked"
                   checked
                 />
-                <!-- <label class="form-check-label" for="flexSwitchCheckChecked"
-                  >上架中</label
-                > -->
               </div>
               <div v-else class="form-check form-switch">
                 <input
@@ -52,9 +47,6 @@
                   type="checkbox"
                   id="flexSwitchCheckDefault"
                 />
-                <!-- <label class="form-check-label" for="flexSwitchCheckDefault"
-                  >未啟用</label
-                > -->
               </div>
             </td>
             <td>
@@ -114,7 +106,6 @@ export default {
       const api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/admin/products/all`;
       this.$http.get(api).then((res) => {
         this.products = res.data.products;
-        // console.log(this.products);
       });
     },
     openModal(status, item) {
@@ -143,7 +134,6 @@ export default {
         method = "post";
       }
       this.$http[method](api, { data: this.tempProduct }).then(() => {
-        // console.log(res);
         const modalComponent = this.$refs.productModalref;
         modalComponent.hideModal();
         this.getProducts();
@@ -151,7 +141,6 @@ export default {
       this.getProducts();
     },
     delProduct() {
-      // console.log(this.tempProduct);
       const api = `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.tempProduct.id}`;
       this.$http
         .delete(api)

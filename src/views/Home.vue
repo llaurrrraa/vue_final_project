@@ -35,8 +35,9 @@
     <div class="sale my-5">
       <h5 class="sub-title">你要的阿姨都有賣..</h5>
       <swiper
+        class="swiper-product"
         :modules="modules"
-        :slides-per-view="5"
+        :slides-per-view="4"
         :space-between="30"
         :pagination="{ clickable: true }"
         navigation
@@ -49,7 +50,7 @@
     <div class="concept row-col-3">
       <div class="trade-card col-3">
         <div class="card-body">
-          <h2 class="card-title">- 公平交易 -</h2>
+          <h2 class="card-title">公平交易</h2>
           <p class="hover-card-text">
             小農的用心耕作與消費者能夠安心選購，在價格上我們或許不是最便宜，卻不願讓任何一邊受委屈，
             阿姨的堅持，讓小農笑得開心、希望您也吃得安心。
@@ -58,7 +59,7 @@
       </div>
       <div class="nice-card col-3">
         <div class="card-body">
-          <h2 class="card-title">- 友善耕作 -</h2>
+          <h2 class="card-title">友善耕作</h2>
           <p class="hover-card-text">
             為了保護土地和生態系，使用最接近大自然原始的方式務農，
             減少人為破壞、讓土地永續經營、生生不息。
@@ -67,7 +68,7 @@
       </div>
       <div class="organic-card col-3">
         <div class="card-body">
-          <h2 class="card-title">- 有機農業 -</h2>
+          <h2 class="card-title">有機農業</h2>
           <p class="hover-card-text">
             不污染環境、不破壞生態，我們與採用有機方式生產的小農合作，
             提供消費者最健康與安全的農產品。
@@ -126,9 +127,9 @@ export default {
 html,body{
   width:100%;
 }
-// .home-banner {
-//   max-width: 1440px;
-// }
+.swiper-product{
+  height:400px;
+}
 .swiper-button-prev,
 .swiper-button-next {
   background-color: rgba(0, 0, 0, 0.3);

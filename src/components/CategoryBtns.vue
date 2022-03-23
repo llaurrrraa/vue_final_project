@@ -67,17 +67,21 @@ export default {
     margin: 0.5rem 0;
   }
 }
-@media (max-width: 768px) { 
-  .category{
+@media (max-width: 768px) {
+  .category {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
-    .btn{
-      padding:1rem 1.2rem;
-      img{
-        max-width:3rem;
+    .btn {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      // padding: 1rem 1.2rem;
+      img {
+        max-width: 2rem;
       }
     }
   }
- }
+}
 </style>

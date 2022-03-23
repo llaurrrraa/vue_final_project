@@ -190,8 +190,7 @@ export default {
 @media (min-width: 768px) { 
   .cards{
     .card{
-      min-width:250px;
-      max-width:251px;
+      max-width:250px;
     }
   }
  }

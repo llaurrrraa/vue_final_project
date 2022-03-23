@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container d-flex flex-column min-vh-100">
     <div class="swiper my-5">
       <swiper
         :modules="modules"
@@ -37,10 +37,23 @@
       <swiper
         class="swiper-product"
         :modules="modules"
-        :slides-per-view="4"
         :space-between="30"
         :pagination="{ clickable: true }"
         navigation
+        :breakpoints="{
+          '640': {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          '768': {
+            slidesPerView: 2,
+            spaceBetween: 40,
+          },
+          '1024': {
+            slidesPerView: 5,
+            spaceBetween: 50,
+          },
+        }"
       >
         <swiper-slide v-for="item in products" :key="item.id">
           <ProductCard :card-product="[item]" />
@@ -48,7 +61,7 @@
       </swiper>
     </div>
     <div class="concept row-col-3">
-      <div class="trade-card col-3">
+      <div class="trade-card">
         <div class="card-body">
           <h2 class="card-title">公平交易</h2>
           <p class="hover-card-text">
@@ -57,7 +70,7 @@
           </p>
         </div>
       </div>
-      <div class="nice-card col-3">
+      <div class="nice-card">
         <div class="card-body">
           <h2 class="card-title">友善耕作</h2>
           <p class="hover-card-text">
@@ -66,7 +79,7 @@
           </p>
         </div>
       </div>
-      <div class="organic-card col-3">
+      <div class="organic-card">
         <div class="card-body">
           <h2 class="card-title">有機農業</h2>
           <p class="hover-card-text">
@@ -76,8 +89,16 @@
         </div>
       </div>
     </div>
-    <br /><br /><br />
   </div>
+  <footer class="footer bg-light mt-auto">
+    <div class="admin">
+      <router-link to="/login" class="admin-link">| Admin Login |</router-link>
+    </div>
+    <div class="text">
+      <p>© Auntie Tsai 2020 All Rights Reserved.</p>
+      <p>圖片為練習使用，無商業用途。</p>
+    </div>
+  </footer>
 </template>
 <script>
 import CategoryBtns from "@/components/CategoryBtns.vue";
@@ -124,11 +145,16 @@ export default {
 };
 </script>
 <style lang="scss">
-html,body{
-  width:100%;
+html,
+body {
+  width: 100%;
 }
-.swiper-product{
-  height:400px;
+.swiper {
+  max-width: 100%;
+}
+.swiper-product {
+  margin-top: 1rem;
+  height: 400px;
 }
 .swiper-button-prev,
 .swiper-button-next {
@@ -228,13 +254,14 @@ html,body{
 .sale {
   margin-bottom: 5rem;
   .sub-title {
+    text-align: center;
     font-weight: 700;
     color: #9c9c9c;
     letter-spacing: 2.5px;
   }
 }
 .concept {
-  margin-top: 6rem;
+  margin: 3rem 0;
   display: flex;
   justify-content: space-around;
 
@@ -263,6 +290,7 @@ html,body{
   .trade-card,
   .nice-card,
   .organic-card {
+    width: 25%;
     position: relative;
     background-repeat: no-repeat;
     background-position: center center;
@@ -278,7 +306,7 @@ html,body{
       transform: translateY(1em);
       transition: all 0.55s ease;
       letter-spacing: 1px;
-      padding:5px 10px;
+      padding: 5px 10px;
     }
 
     &::before,
@@ -325,8 +353,44 @@ html,body{
         max-height: 10em;
         transform: none;
         background-color: #fff;
-        color:#000;
+        color: #000;
       }
+    }
+  }
+}
+footer {
+  min-width: 100%;
+  height:8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .admin{
+    text-align:center;
+    margin: 1rem 0;
+    .admin-link{
+      text-decoration: none;
+      color:#505050;
+    }
+  }
+  .text{
+    text-align: center;
+    color:#afafaf;
+    p{
+      margin: 0;
+    }
+  }
+}
+@media (max-width: 767.98px) {
+  .concept {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    .trade-card,
+    .nice-card,
+    .organic-card {
+      width: 100%;
+      margin-bottom: 0.5rem;
     }
   }
 }

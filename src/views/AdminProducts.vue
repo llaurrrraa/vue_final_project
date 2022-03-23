@@ -71,7 +71,7 @@
         </tbody>
       </table>
     </div>
-    <Pagination :pages="pagination" @update-page="getProducts"/>
+    <Pagination :pages="pagination" @update-page="getProducts" />
     <ProductModal
       :product="tempProduct"
       ref="productModalref"
@@ -88,7 +88,7 @@
 <script>
 import ProductModal from "@/components/ProductModal.vue";
 import DelModal from "@/components/DelModal.vue";
-import Pagination from '../components/Pagination.vue';
+import Pagination from "../components/Pagination.vue";
 export default {
   data() {
     return {
@@ -97,8 +97,8 @@ export default {
         imagesUrl: [],
       },
       isNew: false,
-      pagination:{},
-      currentPage:1,
+      pagination: {},
+      currentPage: 1,
     };
   },
   components: {

@@ -17,6 +17,10 @@ const routes = [
         component: () => import("../views/About.vue"),
       },
       {
+        path: "shipping",
+        component: () => import("../views/Shipping.vue"),
+      },
+      {
         path: "products", // 多個產品列表
         component: () => import("../views/Products.vue"),
       },

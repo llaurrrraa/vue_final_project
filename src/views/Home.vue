@@ -31,7 +31,7 @@
         </swiper-slide>
       </swiper>
     </div>
-    <CategoryBtns class="my-3" />
+    <CategoryBtns class="my-3" :products="products"/>
     <div class="sale my-5">
       <h5 class="sub-title">你要的阿姨都有賣..</h5>
       <swiper

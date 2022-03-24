@@ -80,6 +80,7 @@ export default {
   },
   methods: {
     getProduct() {
+      console.log(this.$route.params);
       const { id } = this.$route.params;
       this.$http
         .get(

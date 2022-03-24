@@ -25,7 +25,7 @@ const routes = [
         component: () => import("../views/Products.vue"),
       },
       {
-        path: "products/:category", // 多個產品列表
+        path: "products/:category", // 分類產品列表
         component: () => import("../views/ProductsList.vue"),
       },
       {

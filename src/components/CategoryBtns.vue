@@ -1,6 +1,6 @@
 <template>
   <div class="category">
-      <button type="button" class="btn" @click.prevent="changePage('蔬果類')">
+      <button type="button" class="btn" @click.prevent="changePage('蔬菜類')">
           <img src="../assets/images/vegetables.png" alt="" />
           <p>蔬菜類</p>
       </button>
@@ -41,7 +41,6 @@ export default {
   methods: {
     changePage(category) {
       this.$router.push(`/products/${category}`);
-      console.log(category);
     },
   },
 };

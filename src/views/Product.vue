@@ -2,7 +2,7 @@
   <div class="container mt-5">
     <div class="row">
       <aside class="col-md-2 aside me-1">
-        <CategoryList></CategoryList>
+        <CategoryList :products="products"></CategoryList>
       </aside>
       <main class="col main">
         <nav style="" aria-label="breadcrumb">
@@ -80,14 +80,12 @@ export default {
   },
   methods: {
     getProduct() {
-      console.log(this.$route.params);
       const { id } = this.$route.params;
       this.$http
         .get(
           `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/product/${id}`
         )
         .then((res) => {
-          console.log(res);
           this.product = res.data.product;
         });
     },

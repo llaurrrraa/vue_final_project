@@ -57,7 +57,8 @@
 export default {
   methods: {
     changeProducts(category) {
-      this.$emit("change-category", category);
+      this.$emit("change-category",category);
+      this.$router.push(`/products/${category}`);
     },
   },
 };

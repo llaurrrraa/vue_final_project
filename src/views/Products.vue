@@ -36,7 +36,7 @@ export default {
       isLoading: false,
       isLoadingItem: "",
       categoryTitle: "",
-      show:false,
+      show: false,
     };
   },
   components: {
@@ -72,17 +72,12 @@ export default {
           { data }
         )
         .then(() => {
-          // console.log(res);
           this.isLoadingItem = "";
           emitter.emit("getCart");
         });
     },
   },
   mounted() {
-    emitter.on("sendCategory", (category) => {
-      console.log('emit',category);
-      this.getProducts(category);
-    });
     this.getProducts();
   },
 };
@@ -158,12 +153,10 @@ export default {
   box-sizing: content-box;
 }
 * {
-  // border: 1px solid #000000;
   .container {
     .row {
       .main {
         h6 {
-          // font-weight: 700;
           margin-left: 1rem;
           letter-spacing: 1.5px;
           color: #9c9c9c;

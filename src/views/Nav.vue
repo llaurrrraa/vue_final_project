@@ -33,6 +33,11 @@
               >
             </div>
             <div class="p-2 bd-highlight nav-item ms-3">
+              <router-link to="/products" class="router-link nav-link"
+                >運送須知</router-link
+              >
+            </div>
+            <div class="p-2 bd-highlight nav-item ms-3">
               <router-link to="/about" class="nav-link router-link"
                 >關於我們</router-link
               >

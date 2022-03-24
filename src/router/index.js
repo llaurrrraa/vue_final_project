@@ -17,6 +17,10 @@ const routes = [
         component: () => import("../views/About.vue"),
       },
       {
+        path: "shipping",
+        component: () => import("../views/Shipping.vue"),
+      },
+      {
         path: "products", // 多個產品列表
         component: () => import("../views/Products.vue"),
       },
@@ -29,13 +33,13 @@ const routes = [
         component: () => import("../views/Cart.vue"),
       },
       {
-        path: "order", // 購物車
+        path: "order", // 訂單
         component: () => import("../views/Order.vue"),
       },
     ],
   },
   {
-    path: "/login", // 後台
+    path: "/login", // 後台登入
     component: () => import("../views/AdminLogin.vue"),
   },
   {

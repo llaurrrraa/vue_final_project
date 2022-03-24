@@ -1,5 +1,5 @@
 <template>
-    <footer class="footer bg-light mt-auto">
+  <footer class="footer bg-light mt-auto">
     <div class="admin">
       <router-link to="/login" class="admin-link">| Admin Login |</router-link>
     </div>
@@ -10,26 +10,25 @@
   </footer>
 </template>
 <style lang="scss">
-
 footer {
   min-width: 100%;
-  height:8rem;
+  height: 8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  .admin{
-    text-align:center;
+  .admin {
+    text-align: center;
     margin: 1rem 0;
-    .admin-link{
+    .admin-link {
       text-decoration: none;
-      color:#505050;
+      color: #505050;
     }
   }
-  .text{
+  .text {
     text-align: center;
-    color:#afafaf;
-    p{
+    color: #afafaf;
+    p {
       margin: 0;
     }
   }

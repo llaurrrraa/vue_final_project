@@ -101,17 +101,30 @@ export default {
   min-height: calc(100vh - 216px);
   .bgc {
     margin: auto 1.5rem;
+    border: 1px solid #f8f9fa;
+    box-shadow: 2px 2px 15px 1px rgba(240, 240, 240, 0.7);
     border-radius: 1rem;
-    background-color: #f8f9fa;
+    background-color: #fff;
     min-height: 50vh;
     h5 {
+      position: relative;
       text-align: center;
       letter-spacing: 3px;
-      color: #8c8c8c;
+      color: #2e2e2e;
       width: 20rem;
       margin: 0 auto;
       font-weight: 700;
       padding: 4rem 1rem;
+      &::before {
+        content: "";
+        position: absolute;
+        height: 1px;
+        width: 180px;
+        background-color: #65ffbf;
+        top: 100px;
+        left:50%;
+        transform:translateX(-50%);
+      }
     }
     .accordion {
       max-width: 80vh;

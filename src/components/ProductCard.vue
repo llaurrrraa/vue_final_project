@@ -189,6 +189,7 @@ export default {
   .cards {
     .card {
       min-width: 250px;
+      max-width: 251px;
     }
   }
 }

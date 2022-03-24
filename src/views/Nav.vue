@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div class="d-flex bd-highlight me-5 navbar-nav">
             <div class="p-2 bd-highlight nav-item ms-3">
-              <router-link to="/home" class="router-link nav-link"
+              <router-link to="/home" class="active router-link nav-link"
                 >首頁</router-link
               >
             </div>
@@ -33,7 +33,7 @@
               >
             </div>
             <div class="p-2 bd-highlight nav-item ms-3">
-              <router-link to="/shipping" class="router-link nav-link"
+              <router-link to="/products" class="router-link nav-link"
                 >運送須知</router-link
               >
             </div>

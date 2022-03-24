@@ -1,19 +1,6 @@
 <template>
-  <div class="container mt-5 about">
-    <h6>關於阿姨</h6>
-    <hr />
+  <div class="about">
+    <h1>This is an about page</h1>
+    <button type="button" class="btn btn-primary">Button</button>
   </div>
 </template>
-<script>
-export default {
-  
-}
-</script>
-<style lang="scss">
-.about{
-    h6{
-        text-align:center;
-        letter-spacing: 2px;
-    }
-}
-</style>

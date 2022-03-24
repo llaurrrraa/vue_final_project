@@ -90,7 +90,7 @@
       </div>
     </div>
   </div>
-  <!-- <footer class="footer bg-light mt-auto">
+  <footer class="footer bg-light mt-auto">
     <div class="admin">
       <router-link to="/login" class="admin-link">| Admin Login |</router-link>
     </div>
@@ -98,13 +98,11 @@
       <p>© Auntie Tsai 2020 All Rights Reserved.</p>
       <p>圖片為練習使用，無商業用途。</p>
     </div>
-  </footer> -->
-  <Footer />
+  </footer>
 </template>
 <script>
 import CategoryBtns from "@/components/CategoryBtns.vue";
 import ProductCard from "@/components/ProductCard.vue";
-import Footer from "@/components/Footer.vue";
 import { Swiper, SwiperSlide } from "swiper/vue/swiper-vue";
 import { Navigation, Pagination } from "swiper";
 import "swiper/swiper.scss";
@@ -129,7 +127,6 @@ export default {
     SwiperSlide,
     CategoryBtns,
     ProductCard,
-    Footer,
   },
   methods: {
     getProducts() {

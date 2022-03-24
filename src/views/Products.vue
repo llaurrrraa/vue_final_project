@@ -36,6 +36,7 @@ export default {
       isLoading: false,
       isLoadingItem: "",
       categoryTitle: "",
+      show:false,
     };
   },
   components: {
@@ -78,6 +79,10 @@ export default {
     },
   },
   mounted() {
+    emitter.on("sendCategory", (category) => {
+      console.log('emit',category);
+      this.getProducts(category);
+    });
     this.getProducts();
   },
 };

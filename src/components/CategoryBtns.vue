@@ -31,9 +31,11 @@
   </div>
 </template>
 <script>
+import emitter from "@/libraries/emitt.js";
 export default {
   methods: {
     changePage(category) {
+      emitter.emit("sendCategory",category);
       this.$router.push("/products");
       console.log(category);
     },

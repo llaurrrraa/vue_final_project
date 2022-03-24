@@ -22,7 +22,7 @@
     margin: 1rem 0;
     .admin-link {
       text-decoration: none;
-      color:#8C8C8C;
+      color: #8c8c8c;
     }
   }
   .text {

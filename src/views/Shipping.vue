@@ -122,8 +122,8 @@ export default {
         width: 180px;
         background-color: #65ffbf;
         top: 100px;
-        left:50%;
-        transform:translateX(-50%);
+        left: 50%;
+        transform: translateX(-50%);
       }
     }
     .accordion {

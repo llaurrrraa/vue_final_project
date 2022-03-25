@@ -1,33 +1,33 @@
 <template>
   <div class="category">
-      <button type="button" class="btn" @click.prevent="changePage('蔬菜類')">
-          <img src="../assets/images/vegetables.png" alt="" />
-          <p>蔬菜類</p>
-      </button>
-      <button type="button" class="btn" @click.prevent="changePage('水果類')">
-        <img src="../assets/images/fruits.png" alt="" />
-        <p>水果類</p>
-      </button>
-      <button type="button" class="btn" @click.prevent="changePage('肉製品')">
-        <img src="../assets/images/meat.png" alt="" />
-        <p>肉製品</p>
-      </button>
-      <button type="button" class="btn" @click.prevent="changePage('乳製品')">
-        <img src="../assets/images/milk.png" alt="" />
-        <p>乳製品</p>
-      </button>
-      <button type="button" class="btn" @click.prevent="changePage('植栽類')">
-        <img src="../assets/images/plant.png" alt="" />
-        <p>植栽類</p>
-      </button>
-      <button type="button" class="btn" @click.prevent="changePage('食品雜糧')">
-        <img src="../assets/images/rice.png" alt="" />
-        <p>食品雜糧</p>
-      </button>
-      <button type="button" class="btn" @click.prevent="changePage('小農特製')">
-        <img src="../assets/images/farmer.png" alt="" />
-        <p>小農特製</p>
-      </button>
+    <button type="button" class="btn" @click.prevent="changePage('蔬菜類')">
+      <img src="../assets/images/vegetables.png" alt="" />
+      <p>蔬菜類</p>
+    </button>
+    <button type="button" class="btn" @click.prevent="changePage('水果類')">
+      <img src="../assets/images/fruits.png" alt="" />
+      <p>水果類</p>
+    </button>
+    <button type="button" class="btn" @click.prevent="changePage('肉製品')">
+      <img src="../assets/images/meat.png" alt="" />
+      <p>肉製品</p>
+    </button>
+    <button type="button" class="btn" @click.prevent="changePage('乳製品')">
+      <img src="../assets/images/milk.png" alt="" />
+      <p>乳製品</p>
+    </button>
+    <button type="button" class="btn" @click.prevent="changePage('植栽類')">
+      <img src="../assets/images/plant.png" alt="" />
+      <p>植栽類</p>
+    </button>
+    <button type="button" class="btn" @click.prevent="changePage('食品雜糧')">
+      <img src="../assets/images/rice.png" alt="" />
+      <p>食品雜糧</p>
+    </button>
+    <button type="button" class="btn" @click.prevent="changePage('小農特製')">
+      <img src="../assets/images/farmer.png" alt="" />
+      <p>小農特製</p>
+    </button>
   </div>
 </template>
 <script>

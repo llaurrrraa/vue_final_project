@@ -45,9 +45,7 @@ import { ShoppingBagIcon } from "@heroicons/vue/outline";
 export default {
   name: "ProductCard",
   data() {
-    return {
-      products: [],
-    };
+    return {};
   },
   props: ["cardProduct"],
   emits: ["addToCart"],

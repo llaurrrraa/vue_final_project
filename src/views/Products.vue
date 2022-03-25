@@ -58,6 +58,7 @@ export default {
           init.push(current);
           return init;
         }, []);
+      console.log(this.products);
       });
     },
     addToCart(id, count = 1) {

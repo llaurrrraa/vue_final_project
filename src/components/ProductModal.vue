@@ -233,16 +233,19 @@ export default {
       const uploadFile = this.$refs.inputFile.files[0];
       const formData = new FormData();
       // console.log(uploadFile);
-      formData.append('file-to-upload', uploadFile);
+      formData.append("file-to-upload", uploadFile);
       // console.log(formData);
       const url = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/admin/upload`;
-      this.$http.post(url, formData, { headers:{'Content-Type': 'multipart/form-data',} })
+      this.$http
+        .post(url, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
         .then((res) => {
           console.log(res);
         })
         .catch((err) => {
           console.dir(err);
-        })
+        });
     },
     addNewImg() {
       this.tempProduct.imagesUrl = [];

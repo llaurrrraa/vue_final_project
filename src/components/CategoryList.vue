@@ -2,7 +2,7 @@
   <div class="sticky-top" style="top: 76px">
     <div class="list-group list-group-flush">
       <a
-        @click.prevent="changeProducts()"
+        @click.prevent="changeProducts('')"
         class="cl-all list-group-item list-group-item-action"
       >
         👜 ｜ 全部
@@ -57,7 +57,7 @@
 export default {
   methods: {
     changeProducts(category) {
-      this.$emit("change-category",category);
+      this.$emit("change-category", category);
       this.$router.push(`/products/${category}`);
     },
   },
@@ -78,8 +78,8 @@ export default {
   a:hover {
     font-weight: 700;
   }
-  .list-group-item:hover, 
-  .list-group-item-action:focus{
+  .list-group-item:hover,
+  .list-group-item-action:focus {
     background-color: #f8f9fa;
   }
 }

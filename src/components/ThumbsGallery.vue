@@ -1,7 +1,7 @@
 <template>
   <swiper
     :style="{
-      '--swiper-navigation-color': '#8C8C8C',
+      '--swiper-navigation-color': '#e0e0e0',
       '--swiper-pagination-color': '#fff',
     }"
     :loop="true"
@@ -11,14 +11,10 @@
     :modules="modules"
     class="thumbsSwiper"
   >
-    <swiper-slide
-      ><img
-        :src="thumbProduct.imageUrl" /></swiper-slide
-    >
-    <swiper-slide v-for="(images,index) in thumbProduct.imagesUrl" :key="index"
-      ><img
-        :src="images" /></swiper-slide
-    >
+    <swiper-slide><img :src="thumbProduct.imageUrl" /></swiper-slide>
+    <swiper-slide v-for="(images, index) in thumbProduct.imagesUrl" :key="index"
+      ><img :src="images"
+    /></swiper-slide>
   </swiper>
   <swiper
     @swiper="setThumbsSwiper"
@@ -29,19 +25,10 @@
     :modules="modules"
     class="smallSwiper"
   >
-    <swiper-slide
-      ><img
-        :src="thumbProduct.imageUrl" /></swiper-slide
-    >
-    <swiper-slide v-for="(images,index) in thumbProduct.imagesUrl" :key="index"
-      ><img
-        :src="images" /></swiper-slide
-    >
-    <!-- <swiper-slide v-for="(images,index) in thumbProduct.imagesUrl" :key="index"
-      ><img
-        :src="images" /></swiper-slide
-    > -->
-
+    <swiper-slide><img :src="thumbProduct.imageUrl" /></swiper-slide>
+    <swiper-slide v-for="(images, index) in thumbProduct.imagesUrl" :key="index"
+      ><img :src="images"
+    /></swiper-slide>
   </swiper>
 </template>
 <script>
@@ -61,12 +48,11 @@ export default {
     Swiper,
     SwiperSlide,
   },
-  props:["thumbProduct"],
+  props: ["thumbProduct"],
   data() {
     return {
       modules: [FreeMode, Navigation, Thumbs],
       thumbsSwiper: null,
-
     };
   },
   methods: {
@@ -78,8 +64,6 @@ export default {
 </script>
 <style lang="scss">
 .thumbsSwiper.swiper {
-//   width: 40%;
-//   height: 40%;
   .swiper-slide {
     text-align: center;
     font-size: 18px;
@@ -102,7 +86,7 @@ export default {
   .swiper-slide img {
     display: block;
     width: 100%;
-    height: 100%;
+    height: 350px;
     object-fit: cover;
   }
 
@@ -113,7 +97,7 @@ export default {
 }
 
 .smallSwiper {
-//   height: 20%;
+  //   height: 20%;
   box-sizing: border-box;
   padding: 10px 0;
   .swiper-slide {
@@ -122,16 +106,13 @@ export default {
     opacity: 0.4;
   }
   .swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
-}
-
 .smallSwiper .swiper-slide-thumb-active {
   opacity: 1;
 }
-
-
 </style>

@@ -18,11 +18,11 @@
           </ol>
         </nav>
         <hr />
-        <div class="row">
-          <div class="pics col-5">
+        <div class="info-top row row-cols-sm-1 row-cols-md-2">
+          <div class="pics col">
             <ThumbsGallery :thumb-product="product" />
           </div>
-          <div class="info col-7">
+          <div class="info col">
             <h2 class="title">{{ product.title }}</h2>
             <ul>
               <li>
@@ -31,63 +31,79 @@
                 </h6>
               </li>
               <li>
-                <h4>NT$ {{ product.price }}</h4>
+                <h4>
+                  NT$ {{ product.price }} / <span>{{ product.unit }}</span>
+                </h4>
               </li>
-              <li><h6>｜消費滿$899即可享免運優惠</h6></li>
+              <li><br /></li>
+              <li><h6>｜消費滿 $899 即可享免運優惠</h6></li>
               <li><h6>｜米飯類加價購 +89 元起！</h6></li>
             </ul>
-
-            <!-- <table class="table">
-              <thead>
-                <tr>
-                  <th>產品說明</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>產品名稱</td>
-                  <td>{{ product.title }}</td>
-                </tr>
-                <tr>
-                  <td>售價</td>
-                  <td>$ {{ product.price }} 元 / {{ product.unit }}</td>
-                </tr>
-                <tr>
-                  <td>原價</td>
-                  <td>
-                    <del>$ {{ product.origin_price }}</del>
-                  </td>
-                </tr>
-                <tr>
-                  <td>產地</td>
-                  <td>{{ product.description }}</td>
-                </tr>
-                <tr>
-                  <td>產品說明</td>
-                  <td width="300">{{ product.content }}</td>
-                </tr>
-              </tbody>
-            </table> -->
+            <div class="input-group qtyBtn my-4">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="button-minus1"
+                @click="minus(qty - 1)"
+              >
+                －
+              </button>
+              <input
+                type="text"
+                style="max-width: 50px; text-align: center"
+                class="form-control"
+                placeholder=""
+                aria-label="Example text with button addon"
+                aria-describedby="button-addon1"
+                v-model="qty"
+                readonly
+              />
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="button-add1"
+                @click="add(qty + 1)"
+              >
+                ＋
+              </button>
+              <button
+                type="button"
+                class="add-cart btn btn-lg btn-outline-dark"
+                @click="addToCart(product.id)"
+              >
+                加入購物車
+              </button>
+            </div>
           </div>
+        </div>
+        <div class="info-bottom">
+          <div class="content my-5">
+            {{ product.content }}
+          </div>
+          <span>小農產區：{{ product.description }}</span>
         </div>
       </main>
     </div>
   </div>
+  <Footer />
 </template>
 <script>
 import ThumbsGallery from "@/components/ThumbsGallery.vue";
 import CategoryList from "@/components/CategoryList.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
   data() {
     return {
+      products: [],
       product: [],
+      qty: 1,
     };
   },
   components: {
     CategoryList,
     ThumbsGallery,
+    Footer,
   },
   methods: {
     getProduct() {
@@ -101,6 +117,33 @@ export default {
           console.log(this.product);
         });
     },
+    minus(count) {
+      if (count > 0) {
+        count - 1;
+      } else {
+        return 1;
+      }
+      this.qty = count;
+    },
+    add(count) {
+      if (count < 10) {
+        count + 1;
+      } else {
+        return 9;
+      }
+      this.qty = count;
+    },
+    addToCart(id) {
+      const data = {
+        product_id: id,
+        qty: this.qty,
+      };
+      const api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/cart`;
+      this.$http.post(api, { data }).then((res) => {
+        console.log(res);
+        alert("已加入購物車！");
+      });
+    },
   },
   mounted() {
     this.getProduct();
@@ -112,31 +155,93 @@ export default {
   letter-spacing: 1px;
 }
 .main {
-  .row {
+  margin-bottom: 8rem;
+  .info-top {
     display: flex;
-    justify-content: space-between;
+    align-items: flex-end;
     .info {
       padding: 1rem;
       .title {
-        position:relative;
+        position: relative;
         letter-spacing: 2px;
         font-weight: 700;
         margin-bottom: 2rem;
-        &::before{
-          content:"";
+        &::before {
+          content: "";
           position: absolute;
-          height:5px;
-          width:140px;
+          height: 5px;
+          width: 140px;
           background-color: #65ffbf;
-          top:45px;
+          top: 45px;
         }
       }
-      ul{
-        padding:0;
+      ul {
+        padding: 0;
+        margin-bottom: 3rem;
       }
       ul > li {
         list-style: none;
+        del {
+          color: #8c8c8c;
+        }
+        h4 {
+          background-color: #65ffbf;
+          color: blue;
+          padding: 5px;
+          text-align: center;
+          max-width: 15rem;
+          display: inline-block;
+          span {
+            font-size: 1.15rem;
+            font-weight: 700;
+          }
+        }
+        h6 {
+          color: #162dff;
+        }
       }
+      .qtyBtn {
+        .add-cart {
+          width: 60%;
+        }
+      }
+    }
+  }
+  .info-bottom {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 7rem;
+    .content {
+      position: relative;
+      text-align: center;
+      padding: 1rem 3rem;
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        height: 1px;
+        width: 90%;
+        background-color: #dadada;
+        transform: translateX(-50%);
+      }
+      &::before {
+        top: -20px;
+        left: 50%;
+      }
+      &::after {
+        bottom: -20px;
+        left: 50%;
+      }
+    }
+    span {
+      color: #8c8c8c;
     }
   }
   .breadcrumb-item {
@@ -150,6 +255,12 @@ export default {
       background-color: #65ffbf;
       padding: 0 5px;
     }
+  }
+}
+@media(max-width:991.98px){
+  .info-bottom{
+    height:500px !important;
+    margin-bottom: 4rem !important;
   }
 }
 </style>

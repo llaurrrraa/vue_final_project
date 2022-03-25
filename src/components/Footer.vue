@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer bg-light mt-auto">
+  <footer class="footer bg-dark mt-auto">
     <div class="admin">
       <router-link to="/login" class="admin-link">| Admin Login |</router-link>
     </div>
@@ -26,10 +26,12 @@
     }
   }
   .text {
+    letter-spacing: 2px;
     text-align: center;
     color: #afafaf;
     p {
       margin: 0;
+      font-size: 12px;
     }
   }
 }

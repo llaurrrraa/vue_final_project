@@ -20,10 +20,24 @@
         <hr />
         <div class="row">
           <div class="pics col-5">
-            <ThumbsGallery :thumb-product="product"/>
+            <ThumbsGallery :thumb-product="product" />
           </div>
           <div class="info col-7">
-            <table class="table">
+            <h2 class="title">{{ product.title }}</h2>
+            <ul>
+              <li>
+                <h6>
+                  <del>原價 NT$ {{ product.origin_price }}</del>
+                </h6>
+              </li>
+              <li>
+                <h4>NT$ {{ product.price }}</h4>
+              </li>
+              <li><h6>｜消費滿$899即可享免運優惠</h6></li>
+              <li><h6>｜米飯類加價購 +89 元起！</h6></li>
+            </ul>
+
+            <!-- <table class="table">
               <thead>
                 <tr>
                   <th>產品說明</th>
@@ -54,7 +68,7 @@
                   <td width="300">{{ product.content }}</td>
                 </tr>
               </tbody>
-            </table>
+            </table> -->
           </div>
         </div>
       </main>
@@ -98,8 +112,31 @@ export default {
   letter-spacing: 1px;
 }
 .main {
-  .row{
-    .pics{
+  .row {
+    display: flex;
+    justify-content: space-between;
+    .info {
+      padding: 1rem;
+      .title {
+        position:relative;
+        letter-spacing: 2px;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        &::before{
+          content:"";
+          position: absolute;
+          height:5px;
+          width:140px;
+          background-color: #65ffbf;
+          top:45px;
+        }
+      }
+      ul{
+        padding:0;
+      }
+      ul > li {
+        list-style: none;
+      }
     }
   }
   .breadcrumb-item {

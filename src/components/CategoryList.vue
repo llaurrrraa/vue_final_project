@@ -57,7 +57,8 @@
 export default {
   methods: {
     changeProducts(category) {
-      this.$emit("change-category", category);
+      this.$emit("change-category",category);
+      this.$router.push(`/products/${category}`);
     },
   },
 };
@@ -76,6 +77,10 @@ export default {
   }
   a:hover {
     font-weight: 700;
+  }
+  .list-group-item:hover, 
+  .list-group-item-action:focus{
+    background-color: #f8f9fa;
   }
 }
 </style>

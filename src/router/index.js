@@ -17,8 +17,16 @@ const routes = [
         component: () => import("../views/About.vue"),
       },
       {
+        path: "shipping",
+        component: () => import("../views/Shipping.vue"),
+      },
+      {
         path: "products", // 多個產品列表
         component: () => import("../views/Products.vue"),
+      },
+      {
+        path: "products/:category", // 分類產品列表
+        component: () => import("../views/ProductsList.vue"),
       },
       {
         path: "product/:id", // 單一產品列表
@@ -29,13 +37,13 @@ const routes = [
         component: () => import("../views/Cart.vue"),
       },
       {
-        path: "order", // 購物車
+        path: "order", // 訂單
         component: () => import("../views/Order.vue"),
       },
     ],
   },
   {
-    path: "/login", // 後台
+    path: "/login", // 後台登入
     component: () => import("../views/AdminLogin.vue"),
   },
   {

@@ -23,13 +23,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div class="d-flex bd-highlight me-5 navbar-nav">
             <div class="p-2 bd-highlight nav-item ms-3">
-              <router-link to="/home" class="active router-link nav-link"
+              <router-link to="/home" class="router-link nav-link"
                 >首頁</router-link
               >
             </div>
             <div class="p-2 bd-highlight nav-item ms-3">
               <router-link to="/products" class="router-link nav-link"
                 >所有產品</router-link
+              >
+            </div>
+            <div class="p-2 bd-highlight nav-item ms-3">
+              <router-link to="/shipping" class="router-link nav-link"
+                >運送須知</router-link
               >
             </div>
             <div class="p-2 bd-highlight nav-item ms-3">
@@ -54,7 +59,6 @@
       </div>
     </div>
   </nav>
-  <footer class="footer bg-light mt-auto"></footer>
   <router-view />
   <loading v-model:active="isLoading"></loading>
 </template>

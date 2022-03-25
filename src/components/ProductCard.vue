@@ -1,5 +1,5 @@
 <template>
-  <div class="cards row" >
+  <div class="cards row">
     <div class="col my-3" v-for="item in cardProduct" :key="item.id">
       <div class="card h-260">
         <div class="card-body">
@@ -23,7 +23,7 @@
         <div class="card-footer">
           <div class="wrapper" ref="count">
             <a class="minus" @click="minus(item)">－</a>
-            <input type="text" class="num" min="1" :value="item.qty"/>
+            <input type="text" class="num" min="1" :value="item.qty" />
             <a class="plus" @click="add(item)">＋</a>
           </div>
 
@@ -43,10 +43,10 @@
 import { ShoppingBagIcon } from "@heroicons/vue/outline";
 
 export default {
-  name:"ProductCard",
+  name: "ProductCard",
   data() {
     return {
-      products:[],
+      products: [],
     };
   },
   props: ["cardProduct"],
@@ -56,23 +56,21 @@ export default {
   },
   methods: {
     minus(item) {
-      if(item.qty>1){
-        item.qty = item.qty-1;
-      }else{
-        return item.qty=1;
+      if (item.qty > 1) {
+        item.qty = item.qty - 1;
+      } else {
+        return (item.qty = 1);
       }
-
     },
     add(item) {
-      if(item.qty<9){
-        item.qty = item.qty+1;
-      }else{
-        return item.qty=9;
+      if (item.qty < 9) {
+        item.qty = item.qty + 1;
+      } else {
+        return (item.qty = 9);
       }
     },
-  }, 
-  mounted() {
   },
+  mounted() {},
 };
 </script>
 <style lang="scss">
@@ -187,12 +185,12 @@ export default {
     }
   }
 }
-@media (min-width: 768px) { 
-  .cards{
-    .card{
-      min-width:250px;
-      max-width:251px;
+@media (min-width: 768px) {
+  .cards {
+    .card {
+      min-width: 250px;
+      max-width: 251px;
     }
   }
- }
+}
 </style>

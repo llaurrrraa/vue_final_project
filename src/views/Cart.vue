@@ -1,4 +1,5 @@
 <template>
+<div class="container">
   <div class="row mt-5">
     <div class="col-lg-8 cart-left">
       <div class="title mb-5">
@@ -142,6 +143,8 @@
       </div>
     </div>
   </div>
+
+</div>
 </template>
 
 <script>

@@ -5,6 +5,7 @@
         :modules="modules"
         :slides-per-view="1"
         :space-between="50"
+        :loop="true"
         :pagination="{ clickable: true }"
         navigation
       >
@@ -31,13 +32,14 @@
         </swiper-slide>
       </swiper>
     </div>
-    <CategoryBtns class="my-3" :products="products"/>
+    <CategoryBtns class="my-3" :products="products" />
     <div class="sale my-5">
       <h5 class="sub-title">你要的阿姨都有賣..</h5>
       <swiper
         class="swiper-product"
         :modules="modules"
         :space-between="30"
+        :loop="true"
         :pagination="{ clickable: true }"
         navigation
         :breakpoints="{
@@ -202,12 +204,10 @@ body {
     span {
       background-color: rgba(255, 255, 255, 0.5);
       color: #c15b07;
-      // text-shadow: 0 0 2px #000;
       border: 2px solid #fff;
       font-weight: 300;
       font-size: 3rem;
       padding: 0.5rem;
-      // background-color: rgba(255,255,255,0.8);
       border-radius: 15px;
     }
   }

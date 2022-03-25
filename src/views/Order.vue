@@ -3,7 +3,6 @@
     <div class="row mt-5 order">
       <div class="col-lg-8 cart-left">
         <div class="title mb-5">
-          
           <h6>填寫訂單</h6>
         </div>
         <div class="row">

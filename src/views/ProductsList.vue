@@ -52,6 +52,11 @@ export default {
       this.$http.get(api).then((res) => {
         this.products = res.data.products;
         this.isLoading = false;
+        this.products = res.data.products.reduce((init, current) => {
+          current.qty = 1;
+          init.push(current);
+          return init;
+        }, []);
       });
       this.categoryTitle = type;
     },

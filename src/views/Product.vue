@@ -1,14 +1,14 @@
 <template>
-  <div class="container mt-5">
+  <div class="container mt-5 product">
     <div class="row">
-      <aside class="col-md-2 aside me-1">
+      <aside class="col-md-2 aside">
         <CategoryList :products="products"></CategoryList>
       </aside>
-      <main class="col main">
+      <main class="col-md-10 main">
         <nav style="" aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <router-link to="/products">所有產品</router-link>
+              <router-link to="/products">{{ product.category }}</router-link>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
               <router-link :to="`/product/${product.id}`">{{
@@ -19,10 +19,10 @@
         </nav>
         <hr />
         <div class="row">
-          <div class="col">
-            <img :src="product.imageUrl" alt="" style="max-width: 50vh" />
+          <div class="pics col-5">
+            <ThumbsGallery :thumb-product="product"/>
           </div>
-          <div class="col">
+          <div class="info col-7">
             <table class="table">
               <thead>
                 <tr>
@@ -57,16 +57,12 @@
             </table>
           </div>
         </div>
-        <div class="content">
-          <span v-for="img in product.imagesUrl" :key="`${img}` + 1">
-            <img :src="img" alt="" style="width: 50vh" />
-          </span>
-        </div>
       </main>
     </div>
   </div>
 </template>
 <script>
+import ThumbsGallery from "@/components/ThumbsGallery.vue";
 import CategoryList from "@/components/CategoryList.vue";
 
 export default {
@@ -77,6 +73,7 @@ export default {
   },
   components: {
     CategoryList,
+    ThumbsGallery,
   },
   methods: {
     getProduct() {
@@ -87,6 +84,7 @@ export default {
         )
         .then((res) => {
           this.product = res.data.product;
+          console.log(this.product);
         });
     },
   },
@@ -95,3 +93,26 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.product {
+  letter-spacing: 1px;
+}
+.main {
+  .row{
+    .pics{
+    }
+  }
+  .breadcrumb-item {
+    a {
+      text-decoration: none;
+      color: #8c8c8c;
+    }
+    .router-link-exact-active {
+      color: blue;
+      font-weight: 700;
+      background-color: #65ffbf;
+      padding: 0 5px;
+    }
+  }
+}
+</style>

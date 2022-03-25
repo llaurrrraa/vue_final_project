@@ -1,150 +1,149 @@
 <template>
-<div class="container">
-  <div class="row mt-5">
-    <div class="col-lg-8 cart-left">
-      <div class="title mb-5">
-        <ShoppingBagIcon class="sb-icon" />
-        <h6>購物車</h6>
-      </div>
-      <table class="table align-center align-middle">
-        <thead class="text-secondary">
-          <tr>
-            <th class="text-center" style="font-weight: 300">產品名稱</th>
-            <th class="text-center" style="font-weight: 300">產品照片</th>
-            <th class="text-center" style="font-weight: 300">數量單位</th>
-            <th class="text-center" style="font-weight: 300">單價</th>
-            <th class="text-center" style="font-weight: 300">總價</th>
-            <th class="text-center" style="font-weight: 300">刪除</th>
-          </tr>
-        </thead>
-        <tbody>
-          <template v-if="cartData.carts.length > 0">
-            <tr v-for="item in cartData.carts" :key="item.product_id">
-              <td class="text-center">{{ item.product.title }}</td>
-              <td>
-                <img :src="item.product.imageUrl" style="max-width: 150px" />
-              </td>
-              <td class="text-center" style="width: 180px">
-                <div class="input-group">
-                  <loading
-                    v-show="isLoadingItem === item.id"
-                    :is-full-page="false"
-                    ><div class="loadingio-spinner-spinner-n3aayyd8xj">
-                      <div class="ldio-hpqk1yjwodj">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                      </div>
-                    </div>
-                  </loading>
-                  <div class="input-group input-group-sm qtyBtn">
-                    <button
-                      class="btn btn-outline-secondary"
-                      type="button"
-                      id="button-minus1"
-                      @click="minusCart(item)"
-                    >
-                      －
-                    </button>
-                    <input
-                      type="text"
-                      style="max-width: 50px; text-align: center"
-                      class="form-control"
-                      placeholder=""
-                      aria-label="Example text with button addon"
-                      aria-describedby="button-addon1"
-                      v-model="item.qty"
-                      readonly
-                    />
-                    <button
-                      class="btn btn-outline-secondary"
-                      type="button"
-                      id="button-add1"
-                      @click="addCart(item)"
-                    >
-                      ＋
-                    </button>
-                  </div>
-                  <span class="unit"> {{ item.product.unit }} </span>
-                </div>
-              </td>
-              <td class="text-end">
-                <del>原價 ${{ item.product.origin_price }}</del>
-                <br />
-                <span
-                  >現在特價
-                  <span class="sale-price"
-                    >${{ item.product.price }}</span
-                  ></span
-                >
-              </td>
-              <td class="text-center final-price">
-                <span>$ {{ item.final_total }}</span>
-              </td>
-              <td class="text-center">
-                <button
-                  type="button"
-                  class="btn btn-light"
-                  @click="deleteCart(item.id)"
-                >
-                  X
-                </button>
-              </td>
-            </tr>
-          </template>
-          <template v-else>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8 cart-left">
+        <div class="title mb-5">
+          <ShoppingBagIcon class="sb-icon" />
+          <h6>購物車</h6>
+        </div>
+        <table class="table align-center align-middle">
+          <thead class="text-secondary">
             <tr>
-              <td colspan="6" class="empty-txt text-center table-light">
-                購物車很空哦 ～
-              </td>
+              <th class="text-center" style="font-weight: 300">產品名稱</th>
+              <th class="text-center" style="font-weight: 300">產品照片</th>
+              <th class="text-center" style="font-weight: 300">數量單位</th>
+              <th class="text-center" style="font-weight: 300">單價</th>
+              <th class="text-center" style="font-weight: 300">總價</th>
+              <th class="text-center" style="font-weight: 300">刪除</th>
             </tr>
-          </template>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-lg-4 cart-right">
-      <div class="title mb-5">
-        <h6>訂單資訊</h6>
+          </thead>
+          <tbody>
+            <template v-if="cartData.carts.length > 0">
+              <tr v-for="item in cartData.carts" :key="item.product_id">
+                <td class="text-center">{{ item.product.title }}</td>
+                <td>
+                  <img :src="item.product.imageUrl" style="max-width: 150px" />
+                </td>
+                <td class="text-center" style="width: 180px">
+                  <div class="input-group">
+                    <loading
+                      v-show="isLoadingItem === item.id"
+                      :is-full-page="false"
+                      ><div class="loadingio-spinner-spinner-n3aayyd8xj">
+                        <div class="ldio-hpqk1yjwodj">
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                        </div>
+                      </div>
+                    </loading>
+                    <div class="input-group input-group-sm qtyBtn">
+                      <button
+                        class="btn btn-outline-secondary"
+                        type="button"
+                        id="button-minus1"
+                        @click="minusCart(item)"
+                      >
+                        －
+                      </button>
+                      <input
+                        type="text"
+                        style="max-width: 50px; text-align: center"
+                        class="form-control"
+                        placeholder=""
+                        aria-label="Example text with button addon"
+                        aria-describedby="button-addon1"
+                        v-model="item.qty"
+                        readonly
+                      />
+                      <button
+                        class="btn btn-outline-secondary"
+                        type="button"
+                        id="button-add1"
+                        @click="addCart(item)"
+                      >
+                        ＋
+                      </button>
+                    </div>
+                    <span class="unit"> {{ item.product.unit }} </span>
+                  </div>
+                </td>
+                <td class="text-end">
+                  <del>原價 ${{ item.product.origin_price }}</del>
+                  <br />
+                  <span
+                    >現在特價
+                    <span class="sale-price"
+                      >${{ item.product.price }}</span
+                    ></span
+                  >
+                </td>
+                <td class="text-center final-price">
+                  <span>$ {{ item.final_total }}</span>
+                </td>
+                <td class="text-center">
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    @click="deleteCart(item.id)"
+                  >
+                    X
+                  </button>
+                </td>
+              </tr>
+            </template>
+            <template v-else>
+              <tr>
+                <td colspan="6" class="empty-txt text-center table-light">
+                  購物車很空哦 ～
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
       </div>
-      <div class="card mx-auto" style="width: 20rem">
-        <div class="card-body">
-          <div class="total_price">
-            <p class="card-text">總金額</p>
-            <p>$ {{ cartData.final_total }}</p>
-          </div>
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              class="form-control"
-              aria-label="Recipient's username"
-              aria-describedby="button-addon2"
-            />
-            <button
-              class="btn btn-outline-secondary"
-              type="button"
-              id="button-addon2"
-            >
-              優惠碼
+      <div class="col-lg-4 cart-right">
+        <div class="title mb-5">
+          <h6>訂單資訊</h6>
+        </div>
+        <div class="card mx-auto" style="width: 20rem">
+          <div class="card-body">
+            <div class="total_price">
+              <p class="card-text">總金額</p>
+              <p>$ {{ cartData.final_total }}</p>
+            </div>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                aria-label="Recipient's username"
+                aria-describedby="button-addon2"
+              />
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="button-addon2"
+              >
+                優惠碼
+              </button>
+            </div>
+            <button class="btn d-block w-100 btn-dark" @click="moveToOrder">
+              前往結帳
             </button>
           </div>
-          <button class="btn d-block w-100 btn-dark" @click="moveToOrder">
-            前往結帳
-          </button>
         </div>
       </div>
     </div>
   </div>
-
-</div>
 </template>
 
 <script>

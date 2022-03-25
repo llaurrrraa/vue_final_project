@@ -150,30 +150,33 @@
               <hr />
               <h5>多圖新增</h5>
               <!-- 是不是陣列的方法（ Array.isArray ），如果是陣列才會跑迴圈 -->
-              <div v-if="Array.isArray(product.imagesUrl)">
-                <div v-for="(image, key) in product.imagesUrl" :key="key + '1'">
+              <div v-if="Array.isArray(tempProduct.imagesUrl)">
+                <div v-for="(image, key) in tempProduct.imagesUrl" :key="key + '1'">
                   <div class="mb-3">
                     <input
                       type="text"
                       class="form-control mb-1"
                       placeholder="請輸入圖片連結"
+                      v-model="tempProduct.imagesUrl[key]"
                     />
-                    <img class="img-fluid" :src="product.imagesUrl[key]" />
+                    <img class="img-fluid" :src="tempProduct.imagesUrl[key]" />
                   </div>
                 </div>
                 <div
                   v-if="
-                    !product.imagesUrl.length ||
-                    product.imagesUrl[product.imagesUrl.length - 1]
+                    !tempProduct.imagesUrl.length ||
+                    tempProduct.imagesUrl[tempProduct.imagesUrl.length - 1]
                   "
                 >
-                  <button class="btn btn-outline-primary btn-sm d-block w-100">
+                  <button class="btn btn-outline-primary btn-sm d-block w-100"
+                  @click="tempProduct.imagesUrl.push('')">
                     <!-- 新增為字串形式，所以加 ''  -->
                     新增圖片
                   </button>
                 </div>
                 <div v-else>
-                  <button class="btn btn-outline-danger btn-sm d-block w-100">
+                  <button class="btn btn-outline-danger btn-sm d-block w-100"
+                  @click="tempProduct.imagesUrl.pop()">
                     刪除圖片
                   </button>
                 </div>

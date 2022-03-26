@@ -86,8 +86,10 @@
     </div>
   </div>
   <Footer />
+  <Loading :is-loading="isLoading" :is-loading-item="isLoadingItem" />
 </template>
 <script>
+import Loading from "@/components/Loading.vue";
 import ThumbsGallery from "@/components/ThumbsGallery.vue";
 import CategoryList from "@/components/CategoryList.vue";
 import Footer from "@/components/Footer.vue";
@@ -95,6 +97,8 @@ import Footer from "@/components/Footer.vue";
 export default {
   data() {
     return {
+      isLoading: false,
+      isLoadingItem: "",
       products: [],
       product: [],
       qty: 1,
@@ -104,17 +108,19 @@ export default {
     CategoryList,
     ThumbsGallery,
     Footer,
+    Loading,
   },
   methods: {
     getProduct() {
+      this.isLoading = true;
       const { id } = this.$route.params;
       this.$http
         .get(
           `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/product/${id}`
         )
         .then((res) => {
+          this.isLoading = false;
           this.product = res.data.product;
-          console.log(this.product);
         });
     },
     minus(count) {
@@ -139,8 +145,7 @@ export default {
         qty: this.qty,
       };
       const api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/cart`;
-      this.$http.post(api, { data }).then((res) => {
-        console.log(res);
+      this.$http.post(api, { data }).then(() => {
         alert("已加入購物車！");
       });
     },

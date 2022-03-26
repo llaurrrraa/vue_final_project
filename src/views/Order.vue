@@ -1,14 +1,11 @@
 <template>
-  <div class="container">
-    <div class="row mt-5 order">
+  <div class="container d-flex flex-column order">
+    <div class="row mt-5">
       <div class="col-lg-8 cart-left">
         <div class="title mb-5">
           <h6>填寫訂單</h6>
         </div>
-        <div class="row">
-          <!-- eslint-disable -->
-          <!-- <v-form v-slot="{ errors }" @submit="onSubmit" /> -->
-          <!-- eslint-disable -->
+        <div class="form row">
           <div class="col form-floating mb-3">
             <input
               type="text"
@@ -95,9 +92,11 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
+import Footer from "@/components/Footer.vue";
 export default {
   data() {
     return {
@@ -111,6 +110,9 @@ export default {
         message: "",
       },
     };
+  },
+  components: {
+    Footer,
   },
   methods: {
     addOrder() {
@@ -131,6 +133,7 @@ export default {
 
 <style lang="scss">
 .order {
+  min-height: calc(100vh - 216px);
   .title {
     display: flex;
     justify-content: center;
@@ -138,6 +141,30 @@ export default {
       margin-bottom: 0;
       letter-spacing: 1.5px;
       color: #9c9c9c;
+    }
+  }
+  .form{
+    margin-bottom: 2rem;
+  }
+  a {
+    position: relative;
+    text-decoration: none;
+    color:#8C8C8C;
+    letter-spacing: 1px;
+  }
+  a:hover{
+    color:#000;
+    background-color: #f8f9fa;
+    font-weight: 700;
+    transition-duration: 1s;
+    &::before{
+      position: absolute;
+      content:"";
+      height:1px;
+      width:110px;
+      background-color: #000;
+      top:30px;
+      left:10px;
     }
   }
 }

@@ -93,11 +93,13 @@
     </div>
   </div>
   <Footer />
+  <Loading :is-loading="isLoading" :is-loading-item="isLoadingItem" />
 </template>
 <script>
 import CategoryBtns from "@/components/CategoryBtns.vue";
 import ProductCard from "@/components/ProductCard.vue";
 import Footer from "@/components/Footer.vue";
+import Loading from "@/components/Loading.vue";
 import { Swiper, SwiperSlide } from "swiper/vue/swiper-vue";
 import { Navigation, Pagination } from "swiper";
 import "swiper/swiper.scss";
@@ -107,6 +109,8 @@ import "swiper/modules/pagination/pagination.min.css";
 export default {
   data() {
     return {
+      isLoading: false,
+      isLoadingItem:"",
       icons: [
         "../assets/images/vegetables.png",
         "@/assets/images/fruits.png",
@@ -123,11 +127,14 @@ export default {
     CategoryBtns,
     ProductCard,
     Footer,
+    Loading,
   },
   methods: {
     getProducts() {
+      this.isLoading = true;
       let api = `${process.env.VUE_APP_URL}v2/api/${process.env.VUE_APP_API_PATH}/products`;
       this.$http.get(api).then((res) => {
+        this.isLoading = false;
         this.products = res.data.products.map((product) => {
           product.qty = 1;
           return product;

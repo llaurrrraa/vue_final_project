@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="cart container d-flex flex-column">
     <div class="row mt-5">
       <div class="col-lg-8 cart-left">
         <div class="title mb-5">
@@ -30,20 +30,7 @@
                       v-show="isLoadingItem === item.id"
                       :is-full-page="false"
                       ><div class="loadingio-spinner-spinner-n3aayyd8xj">
-                        <div class="ldio-hpqk1yjwodj">
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                        </div>
+                        <div class="ldio-hpqk1yjwodj"></div>
                       </div>
                     </loading>
                     <div class="input-group input-group-sm qtyBtn">
@@ -144,14 +131,19 @@
       </div>
     </div>
   </div>
+  <Footer />
+  <Loading :is-loading="isLoading" :is-loading-item="isLoadingItem"/>
 </template>
 
 <script>
+import Footer from "@/components/Footer.vue";
+import Loading from "@/components/Loading.vue";
 import { ShoppingBagIcon } from "@heroicons/vue/outline";
 import emitter from "@/libraries/emitt.js";
 export default {
   data() {
     return {
+      isLoading: false,
       cartData: {
         carts: "",
       },
@@ -160,15 +152,18 @@ export default {
   },
   components: {
     ShoppingBagIcon,
+    Footer,
+    Loading,
   },
   methods: {
     getCart() {
+      this.isLoading = true;
       this.$http
         .get(
           `${process.env.VUE_APP_URL}/v2/api/${process.env.VUE_APP_API_PATH}/cart`
         )
         .then((res) => {
-          // console.log(res);
+          this.isLoading = false;
           this.cartData = res.data.data;
           // console.log(this.cartData);
         });
@@ -226,6 +221,9 @@ export default {
 </script>
 
 <style lang="scss">
+.cart{
+  min-height: calc(100vh - 216px);
+}
 .cart-left {
   .title {
     display: flex;
